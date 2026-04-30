@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="MouseTodoApp.Adapters/MouseTodoApp.Adapters.csproj" />
+  <Project Path="MouseTodoApp.Application/MouseTodoApp.Application.csproj" />
+  <Project Path="MouseTodoApp.Domain/MouseTodoApp.Domain.csproj" />
+  <Project Path="MouseTodoApp.WebAPI/MouseTodoApp.WebAPI.csproj" />
+</Solution>

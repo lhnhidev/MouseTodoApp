@@ -1,0 +1,101 @@
+# ==========================================
+# THIẾT LẬP CHUNG (OS & Editors)
+# ==========================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.code-workspace
+
+# Visual Studio & Rider (.NET)
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sw?
+*.ntvs*
+*.njsproj
+
+# ==========================================
+# FRONTEND (React / Node.js)
+# ==========================================
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+jspm_packages/
+
+# Build & Production
+dist/
+dist-ssr/
+build/
+out/
+
+# Caches
+.npm
+.eslintcache
+.stylelintcache
+.vite/
+
+# ==========================================
+# BACKEND (.NET C# / Clean Architecture)
+# ==========================================
+# Build results (Bỏ qua bin và obj của tất cả các lớp Domain, App, Adapters, API)
+[Bb]in/
+[Oo]bj/
+
+# Publish output
+[Pp]ublish/
+[Oo]ut/
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+*.TestLogger.csv
+Coverage/
+*.coverage
+*.coveragexml
+
+# EF Core / Database
+*.mdf
+*.ldf
+*.ndf
+*.sqlite
+*.db
+
+# ==========================================
+# BIẾN MÔI TRƯỜNG & SECRETS (QUAN TRỌNG)
+# ==========================================
+# Frontend env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Backend local settings (Chứa chuỗi kết nối DB thật, không push lên Git)
+appsettings.Development.json
+appsettings.local.json
+secrets.json
