@@ -1,0 +1,6 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode", // Extension để định dạng code
+    "dbaeumer.vscode-eslint", // Extension để bắt lỗi code
+  ]
+}

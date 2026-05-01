@@ -1,9 +1,5 @@
 const App = () => {
-  return (
-    <div>
-      Hello! React with .NET 10      
-    </div>
-  )
+  return <h1 className="text-md">Ứng dụng Todo App nè</h1>
 }
 
 export default App

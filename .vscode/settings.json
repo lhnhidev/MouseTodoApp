@@ -1,0 +1,16 @@
+{
+  "editor.formatOnSave": true,                         // Thực hiện format code khi Save
+  "editor.tabSize": 2,                                 // Kích thước Tab là 2
+  "editor.insertSpaces": true,                         // Mỗi khi ấn Tab, sử dụng ký tự Tab thật sự thay vì Space
+  "files.trimTrailingWhitespace": true,                // Tự động xóa bỏ tất cả các khoảng trắng dư thừa ở cuối mỗi dòng code ngay khi bạn nhấn Lưu
+  "files.insertFinalNewline": true,                    // Tự động thêm 1 dòng trống ở cuối file
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // Chọn formatter phù hợp (ví dụ: prettier)
+  // "files.exclude": {                                   // Ẩn đi một sô file/folder trong dự án
+  //   "**/.git": true,
+  //   "**/.DS_Store": true,
+  //   "**/node_modules": true
+  // },
+  // "editor.codeActionsOnSave": {                        // Khi ấn save, eslint sẽ tự động sửa một số lỗi mà nó có thể sửa.
+  //   "source.fixAll.eslint": "explicit"                 // Cái này không cần đa số trường hợp vì prettier đã làm điều đó
+  // }
+}
