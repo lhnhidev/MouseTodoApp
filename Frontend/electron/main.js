@@ -25,10 +25,6 @@ const createWindow = () => {
   if (isDev) {
     const localhostUrl = "http://localhost:5173"
 
-    if (!localhostUrl) {
-      throw new Error("LOCALHOST is not defined in the Frontend .env file")
-    }
-
     win.maximize()
     win.loadURL(localhostUrl)
     win.webContents.openDevTools()
