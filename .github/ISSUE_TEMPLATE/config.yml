@@ -1,0 +1,5 @@
+blank_issues_enabled: false # Tắt nút tạo issue trống
+contact_links:
+  - name: Hỗ trợ
+    url: https://github.com/lhnhidev/MouseTodoApp/issues
+    about: Hãy tạo issue tại đây
