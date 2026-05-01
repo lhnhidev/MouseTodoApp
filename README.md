@@ -49,13 +49,13 @@ Dự án được chia thành 4 lớp (Layers) chính:
 
 ## 📊 Thiết kế hệ thống
 
-### 1. Sơ đồ Usecase (Usecase Diagram) - Bổ sung sau
+### 1. Sơ đồ Usecase (Usecase Diagram) - v1.0.0
 
-_(Chèn hình ảnh sơ đồ Usecase tại đây)_
+![Sơ đồ Use case](./Docs/UseCaseDiagram.png)
 
-### 2. Sơ đồ dữ liệu khái niệm (CDM - Conceptual Data Model) - Sẽ bổ sung sau
+### 2. Sơ đồ dữ liệu khái niệm (CDM - Conceptual Data Model) - v1.0.0
 
-_(Chèn hình ảnh sơ đồ CDM tại đây)_
+![Sơ đồ CDM](./Docs/CDM.png)
 
 ---
 
