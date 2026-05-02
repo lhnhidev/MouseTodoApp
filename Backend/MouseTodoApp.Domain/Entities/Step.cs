@@ -15,6 +15,7 @@ namespace MouseTodoApp.Domain.Entities
         private Step() { }
         public Step(string title, string todoItemId)
         {
+            Id = Guid.NewGuid();
             Title = title.ThrowIfNullOrEmpty(nameof(title));
             TodoItemId = todoItemId.ThrowIfNullOrEmpty(nameof(todoItemId));
         }
