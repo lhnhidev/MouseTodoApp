@@ -22,7 +22,10 @@ app.UseCors();
 app.MapPost("/api/todos", (string title, ICreateTodoUseCase useCase) =>
 {
     var result = useCase.Execute(title);
-    return Results.Ok(new { message = result });
+    return Results.Ok(new
+    {
+        message = result
+    });
 });
 
 app.Run();
