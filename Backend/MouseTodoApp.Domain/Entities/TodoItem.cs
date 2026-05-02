@@ -15,8 +15,8 @@ namespace MouseTodoApp.Domain.Entities
         public bool IsCompleted { get; private set; } = false;
         public bool IsImportantCategory { get; private set; }
         public bool IsInMyDayCategory { get; private set; }
-        public bool IsPlantedCategory { get; private set; }
-        public bool IsAssignmentedCategory { get; private set; }
+        public bool IsPlannedCategory { get; private set; }
+        public bool IsAssignedCategory { get; private set; }
         public DateTime? DueDate { get; private set; }
         public DateTime? ReminderTime { get; private set; }
         public Guid TodoListId { get; private set; }
