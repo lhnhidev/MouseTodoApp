@@ -16,7 +16,7 @@ namespace MouseTodoApp.Domain.Extensions
 
         public static DateTime ThrowIfAfterTheTimeline(this DateTime value, DateTime timeLine, string paramName)
         {
-            if (value < timeLine)
+            if (value > timeLine)
             {
                 throw new InvalidDateTime(paramName);
             }
