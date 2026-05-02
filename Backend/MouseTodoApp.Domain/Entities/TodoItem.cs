@@ -19,7 +19,7 @@ namespace MouseTodoApp.Domain.Entities
         public bool IsAssignmentedCategory { get; private set; }
         public DateTime? DueDate { get; private set; }
         public DateTime? ReminderTime { get; private set; }
-        public string TodoListId { get; private set; } = string.Empty;
+        public Guid TodoListId { get; private set; }
 
         public IReadOnlyCollection<Step> Steps => _steps.AsReadOnly();
 
