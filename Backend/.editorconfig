@@ -1,0 +1,42 @@
+# top-level EditorConfig file
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.cs]
+#### Cấu trúc và Khối (Blocks) ####
+csharp_prefer_braces = true
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+
+#### Quy tắc đặt tên (Naming Rules) ####
+
+# 1. Quy tắc cho Class, Property, Method... (PascalCase)
+dotnet_naming_rule.classes_and_properties_rule.symbols = any_class_or_property
+dotnet_naming_rule.classes_and_properties_rule.style = pascal_case_style
+dotnet_naming_rule.classes_and_properties_rule.severity = suggestion
+
+dotnet_naming_symbols.any_class_or_property.applicable_kinds = class, struct, interface, enum, property, method, event, delegate
+
+# 2. Quy tắc cho Biến cục bộ (Local Variable) và Tham số (Parameter) (camelCase)
+dotnet_naming_rule.camel_case_rule.symbols = any_variable_or_parameter
+dotnet_naming_rule.camel_case_rule.style = camel_case_style
+dotnet_naming_rule.camel_case_rule.severity = suggestion
+
+dotnet_naming_symbols.any_variable_or_parameter.applicable_kinds = local, parameter
+
+# Định nghĩa kiểu viết hoa
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+dotnet_naming_style.camel_case_style.capitalization = camel_case
+
+#### Đóng gói & Từ khóa (Modifiers) ####
+csharp_prefer_static_local_functions = true
+csharp_style_expression_bodied_methods = when_on_single_line

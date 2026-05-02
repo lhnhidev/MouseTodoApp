@@ -1,4 +1,4 @@
-﻿using MouseTodoApp.Application.Ports.Input;
+using MouseTodoApp.Application.Ports.Input;
 using MouseTodoApp.Domain.Entities;
 using System;
 using System.Collections.Generic;
