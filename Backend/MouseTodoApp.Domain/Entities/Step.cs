@@ -1,7 +1,4 @@
 using MouseTodoApp.Domain.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MouseTodoApp.Domain.Entities
 {
@@ -11,13 +8,13 @@ namespace MouseTodoApp.Domain.Entities
         public string Title { get; private set; } = string.Empty;
         public bool IsCompleted { get; private set; } = false;
         public Guid TodoItemId { get; private set; }
-
+        public TodoItem TodoItem { get; private set; } = null!;
         private Step() { }
         public Step(string title, Guid todoItemId)
         {
             Id = Guid.NewGuid();
             Title = title.ThrowIfNullOrEmpty(nameof(title));
-            TodoItemId = todoItemId;
+            TodoItemId = Guid.Parse(todoItemId.ToString().ThrowIfNullOrEmpty(nameof(todoItemId)));
         }
     }
 }
