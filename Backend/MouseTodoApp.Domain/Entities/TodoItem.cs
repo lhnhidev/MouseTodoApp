@@ -38,7 +38,7 @@ namespace MouseTodoApp.Domain.Entities
         )
         {
             Title = title.ThrowIfNullOrEmpty(nameof(title));
-            TodoListId = todoListId.ThrowIfNullOrEmpty(nameof(todoListId));
+            TodoListId = Guid.Parse(todoListId.ThrowIfNullOrEmpty(nameof(todoListId)));
 
             if (dueDate.HasValue)
             {
