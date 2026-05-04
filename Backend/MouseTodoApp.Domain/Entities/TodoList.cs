@@ -20,7 +20,12 @@ namespace MouseTodoApp.Domain.Entities
         {
             Title = title.ThrowIfNullOrEmpty(nameof(title));
             ColorTheme = colorTheme.ThrowIfNullOrEmpty(nameof(colorTheme));
-            UserId = Guid.Parse(userId.ToString().ThrowIfNullOrEmpty(nameof(userId)));
+            if (userId == Guid.Empty)
+            {
+                throw new ArgumentException("UserId cannot be empty.", nameof(userId));
+            }
+
+            UserId = userId;
             _todoItems = [];
 
             Id = Guid.NewGuid();
