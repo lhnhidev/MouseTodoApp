@@ -20,7 +20,7 @@ namespace MouseTodoApp.Domain.Entities
         public DateTime? DueDate { get; private set; }
         public DateTime? ReminderTime { get; private set; }
         public Guid TodoListId { get; private set; }
-
+        public TodoList TodoList { get; private set; } = null!;
         public IReadOnlyCollection<Step> Steps => _steps.AsReadOnly();
 
         private TodoItem() { }
@@ -30,15 +30,20 @@ namespace MouseTodoApp.Domain.Entities
             string? note,
             bool isImportantCategory,
             bool isInMyDayCategory,
-            bool isPlantedCategory,
-            bool isAssignmentedCategory,
+            bool isPlannedCategory,
+            bool isAssignedCategory,
             DateTime? dueDate,
             DateTime? reminderTime,
-            string todoListId
+            Guid todoListId
         )
         {
             Title = title.ThrowIfNullOrEmpty(nameof(title));
-            TodoListId = todoListId.ThrowIfNullOrEmpty(nameof(todoListId));
+            if (todoListId == Guid.Empty)
+            {
+                throw new ArgumentException("Todo list id cannot be empty.", nameof(todoListId));
+            }
+
+            TodoListId = todoListId;
 
             if (dueDate.HasValue)
             {
@@ -69,8 +74,9 @@ namespace MouseTodoApp.Domain.Entities
             IsCompleted = false;
             IsImportantCategory = isImportantCategory;
             IsInMyDayCategory = isInMyDayCategory;
-            IsPlantedCategory = isPlantedCategory;
-            IsAssignmentedCategory = isAssignmentedCategory;
+            IsPlannedCategory = isPlannedCategory;
+            IsAssignedCategory = isAssignedCategory;
+            _steps = [];
 
             Id = Guid.NewGuid();
         }

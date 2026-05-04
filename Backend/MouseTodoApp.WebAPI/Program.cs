@@ -1,10 +1,7 @@
-using MouseTodoApp.Application.Ports.Input;
-using MouseTodoApp.Application.UseCases;
+using Microsoft.EntityFrameworkCore;
+using MouseTodoApp.Adapters;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Đăng ký DI: Yêu cầu ICreateTodoUseCase thì lấy CreateTodoUseCase ra xài
-builder.Services.AddScoped<ICreateTodoUseCase, CreateTodoUseCase>();
 
 // Cấu hình CORS (Cho phép React gọi API mà không bị chặn)
 builder.Services.AddCors(options =>
@@ -15,17 +12,13 @@ builder.Services.AddCors(options =>
     });
 });
 
+// Thêm kết nối SQL Server, đọc connection string từ appsettings.json)
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
 var app = builder.Build();
 app.UseCors();
-
-// API Endpoint
-app.MapPost("/api/todos", (string title, ICreateTodoUseCase useCase) =>
-{
-    var result = useCase.Execute(title);
-    return Results.Ok(new
-    {
-        message = result
-    });
-});
 
 app.Run();
