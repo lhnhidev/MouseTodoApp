@@ -56,13 +56,15 @@ namespace MouseTodoApp.Domain.Entities
 
             if (reminderTime.HasValue)
             {
+                var validatedReminderTime = reminderTime.Value.ThrowIfPastDate(nameof(reminderTime));
+
                 if (dueDate.HasValue)
                 {
-                    ReminderTime = reminderTime.Value.ThrowIfAfterTheTimeline(dueDate.Value, nameof(reminderTime));
+                    ReminderTime = validatedReminderTime.ThrowIfAfterTheTimeline(dueDate.Value, nameof(reminderTime));
                 }
                 else
                 {
-                    ReminderTime = reminderTime;
+                    ReminderTime = validatedReminderTime;
                 }
             }
             else
