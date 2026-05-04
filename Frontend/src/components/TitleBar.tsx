@@ -1,0 +1,60 @@
+import React, { useState, useEffect } from "react"
+import { FaRegSquare, FaRegWindowMinimize, FaRegCopy } from "react-icons/fa6"
+import { IoCloseOutline } from "react-icons/io5"
+
+const TitleBar = () => {
+  const [isMaximized, setIsMaximized] = useState(false)
+
+  useEffect(() => {
+    window.electronAPI.onMaximized(() => setIsMaximized(true))
+    window.electronAPI.onUnmaximized(() => setIsMaximized(false))
+  }, [])
+
+  return (
+    <div className="flex h-9 w-full items-center justify-between border-b border-white/5 bg-(--light-theme-bg) text-[#191919] select-none">
+      <div
+        className="flex h-full flex-1 items-center px-4"
+        style={{ WebkitAppRegion: "drag" } as React.CSSProperties}
+      >
+        <img src="/logo.svg" alt="Logo" className="mr-2 h-4 w-4" />
+        <span className="text-xs font-normal tracking-tight">
+          Mouse Todo App
+        </span>
+      </div>
+
+      <div
+        className="flex h-full items-center"
+        style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
+      >
+        <button
+          onClick={() => window.electronAPI.minimize()}
+          className="flex h-full w-11 items-center justify-center transition-colors hover:bg-[#2d2d2d] hover:text-white"
+        >
+          <FaRegWindowMinimize className="-translate-y-1 text-xs" />
+        </button>
+
+        <button
+          onClick={() => {
+            window.electronAPI.maximize()
+          }}
+          className="flex h-full w-11 items-center justify-center transition-colors hover:bg-[#2d2d2d] hover:text-white"
+        >
+          {isMaximized ? (
+            <FaRegCopy className="-rotate-90 text-xs" />
+          ) : (
+            <FaRegSquare className="text-xs" />
+          )}
+        </button>
+
+        <button
+          onClick={() => window.electronAPI.close()}
+          className="flex h-full w-11 items-center justify-center transition-colors hover:bg-[#c42b1c] hover:text-white"
+        >
+          <IoCloseOutline className="text-xl" />
+        </button>
+      </div>
+    </div>
+  )
+}
+
+export default TitleBar
