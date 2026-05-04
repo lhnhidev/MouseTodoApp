@@ -38,7 +38,12 @@ namespace MouseTodoApp.Domain.Entities
         )
         {
             Title = title.ThrowIfNullOrEmpty(nameof(title));
-            TodoListId = Guid.Parse(todoListId.ToString().ThrowIfNullOrEmpty(nameof(todoListId)));
+            if (todoListId == Guid.Empty)
+            {
+                throw new ArgumentException("Todo list id cannot be empty.", nameof(todoListId));
+            }
+
+            TodoListId = todoListId;
 
             if (dueDate.HasValue)
             {
