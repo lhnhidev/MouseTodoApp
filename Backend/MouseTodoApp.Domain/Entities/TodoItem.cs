@@ -30,8 +30,8 @@ namespace MouseTodoApp.Domain.Entities
             string? note,
             bool isImportantCategory,
             bool isInMyDayCategory,
-            bool isPlantedCategory,
-            bool isAssignmentedCategory,
+            bool isPlannedCategory,
+            bool isAssignedCategory,
             DateTime? dueDate,
             DateTime? reminderTime,
             Guid todoListId
@@ -69,8 +69,8 @@ namespace MouseTodoApp.Domain.Entities
             IsCompleted = false;
             IsImportantCategory = isImportantCategory;
             IsInMyDayCategory = isInMyDayCategory;
-            IsPlannedCategory = isPlantedCategory;
-            IsAssignedCategory = isAssignmentedCategory;
+            IsPlannedCategory = isPlannedCategory;
+            IsAssignedCategory = isAssignedCategory;
             _steps = [];
 
             Id = Guid.NewGuid();
