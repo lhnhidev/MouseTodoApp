@@ -10,9 +10,9 @@ namespace MouseTodoApp.Adapters
             
         }
 
-        public DbSet<Step> Steps { get; set; }
-        public DbSet<TodoItem> TodoItems { get; set; }
-        public DbSet<TodoList> TodoLists { get; set; }
+        public DbSet<Step> Steps { get; set; } = null!;
+        public DbSet<TodoItem> TodoItems { get; set; } = null!;
+        public DbSet<TodoList> TodoLists { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
