@@ -22,7 +22,7 @@ namespace MouseTodoApp.Domain.Entities
             ColorTheme = colorTheme.ThrowIfNullOrEmpty(nameof(colorTheme));
             if (userId == Guid.Empty)
             {
-                throw new ArgumentException("UserId cannot be empty.", nameof(userId));
+                throw new ArgumentException("UserId không được để rỗng", nameof(userId));
             }
 
             UserId = userId;

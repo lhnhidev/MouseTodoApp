@@ -14,7 +14,12 @@ namespace MouseTodoApp.Domain.Entities
         {
             Id = Guid.NewGuid();
             Title = title.ThrowIfNullOrEmpty(nameof(title));
-            TodoItemId = Guid.Parse(todoItemId.ToString().ThrowIfNullOrEmpty(nameof(todoItemId)));
+            if (todoItemId == Guid.Empty)
+            {
+                throw new ArgumentException("TodoItemId không được để rỗng", nameof(todoItemId));
+            }
+
+            TodoItemId = todoItemId;
         }
     }
 }
