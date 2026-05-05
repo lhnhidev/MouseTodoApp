@@ -11,7 +11,7 @@ const TitleBar = () => {
   }, [])
 
   return (
-    <div className="flex h-9 w-full items-center justify-between border-b border-white/5 bg-(--light-theme-bg) text-[#191919] select-none">
+    <div className="flex h-9 w-full items-center justify-between border-b border-white/5 bg-(--light-theme-bg) text-[#191919] select-none dark:bg-(--dark-theme-bg) dark:text-white">
       <div
         className="flex h-full flex-1 items-center px-4"
         style={{ WebkitAppRegion: "drag" } as React.CSSProperties}
