@@ -8,8 +8,14 @@ contextBridge.exposeInMainWorld("electronAPI", {
   maximize: () => ipcRenderer.send("window-maximize"),
   close: () => ipcRenderer.send("window-close"),
 
-  onMaximized: (callback) =>
-    ipcRenderer.on("window-is-maximized", (_event) => callback()),
-  onUnmaximized: (callback) =>
-    ipcRenderer.on("window-is-unmaximized", (_event) => callback())
+  onMaximized: (callback) => {
+    const listener = (_event) => callback()
+    ipcRenderer.on("window-is-maximized", listener)
+    return () => ipcRenderer.removeListener("window-is-maximized", listener)
+  },
+  onUnmaximized: (callback) => {
+    const listener = (_event) => callback()
+    ipcRenderer.on("window-is-unmaximized", listener)
+    return () => ipcRenderer.removeListener("window-is-unmaximized", listener)
+  }
 })

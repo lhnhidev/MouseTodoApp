@@ -37,16 +37,35 @@ const createWindow = () => {
   } else {
     win.loadFile(path.join(__dirname, "../dist/index.html"))
   }
-
-  ipcMain.on("window-minimize", () => win.minimize())
-  ipcMain.on("window-maximize", () => {
-    if (win.isMaximized()) win.unmaximize()
-    else win.maximize()
-  })
-  ipcMain.on("window-close", () => win.close())
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+  createWindow()
+  setupIPC()
+})
+
+function setupIPC() {
+  ipcMain.removeAllListeners("window-minimize")
+  ipcMain.removeAllListeners("window-maximize")
+  ipcMain.removeAllListeners("window-close")
+
+  ipcMain.on("window-minimize", (event) => {
+    const win = BrowserWindow.fromWebContents(event.sender)
+    win?.minimize()
+  })
+
+  ipcMain.on("window-maximize", (event) => {
+    const win = BrowserWindow.fromWebContents(event.sender)
+    if (!win) return
+
+    win.isMaximized() ? win.unmaximize() : win.maximize()
+  })
+
+  ipcMain.on("window-close", (event) => {
+    const win = BrowserWindow.fromWebContents(event.sender)
+    win?.close()
+  })
+}
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
