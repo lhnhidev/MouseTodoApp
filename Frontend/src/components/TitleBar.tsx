@@ -16,7 +16,11 @@ const TitleBar = () => {
         className="flex h-full flex-1 items-center px-4"
         style={{ WebkitAppRegion: "drag" } as React.CSSProperties}
       >
-        <img src="/logo.svg" alt="Logo" className="mr-2 h-4 w-4" />
+        <img
+          src="../../public/Mouse-Todo-App.png"
+          alt="Logo"
+          className="mr-2 h-4 w-4"
+        />
         <span className="text-xs font-normal tracking-tight">
           Mouse Todo App
         </span>
