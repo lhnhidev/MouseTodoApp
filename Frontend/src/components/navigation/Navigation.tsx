@@ -31,8 +31,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeKey, onSelect, user, task
     >
       {/* User Profile */}
       <div
-        className="px-4 pb-4 flex items-center cursor-pointer"
-        onClick={() => {}}
+        className="px-4 pb-4 flex items-center"
       >
         <Avatar
           size={48}
