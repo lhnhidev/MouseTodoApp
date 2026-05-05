@@ -64,9 +64,10 @@ const Navigation: React.FC<NavigationProps> = ({ activeKey, onSelect, user, task
         >
           <Input
             placeholder="Tìm kiếm"
+            variant="borderless"
             onFocus={() => setIsSearchFocused(true)}
             onBlur={() => setIsSearchFocused(false)}
-            className="rounded-[4px] border border-[#d1d1d1] border-b-2 border-b-black h-8 pl-[10px] pr-9 text-sm transition-colors duration-100 shadow-[inset_0_1px_1px_rgba(0,0,0,0.05)]"
+            className="rounded-[2px] !border-[0.1px] !border-[#8a8a8a] !border-b-[1.75px] !border-b-black h-8 pl-[10px] pr-9 text-sm transition-colors duration-100 shadow-[inset_0_1px_1px_rgba(0,0,0,0.05)] hover:bg-[#f3f2f1] focus:bg-white"
             style={{
               backgroundColor: isSearchHovered ? "#f3f2f1" : "#ffffff",
             }}
