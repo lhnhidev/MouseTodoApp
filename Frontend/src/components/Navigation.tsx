@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { useState } from "react"
 import { Avatar, Input, Divider } from "antd"
 import { navColors } from "../assets/styles/navColors"
@@ -11,14 +12,15 @@ type User = {
 
 type NavigationProps = {
   activeKey: string
-  // onSelect: (key: string) => void
+  // eslint-disable-next-line no-unused-vars
+  onSelect: (key: string) => void
   user?: User
   taskCounts?: Record<string, number>
 }
 
 const Navigation = ({
   activeKey,
-  // onSelect,
+  onSelect,
   user,
   taskCounts = {}
 }: NavigationProps) => {
@@ -95,7 +97,7 @@ const Navigation = ({
           <button
             key={item.key}
             type="button"
-            // onClick={() => onSelect(item.key)}
+            onClick={() => onSelect(item.key)}
             aria-current={item.key === activeKey ? "page" : undefined}
             className="relative mx-2 my-0.5 flex w-[calc(100%-16px)] cursor-pointer items-center rounded-sm border-none px-4 py-2 text-left transition-colors duration-100 focus:outline-none"
             style={{
@@ -139,7 +141,7 @@ const Navigation = ({
         <button
           key="untitled-list"
           type="button"
-          // onClick={() => onSelect("untitled-list")}
+          onClick={() => onSelect("untitled-list")}
           aria-current={activeKey === "untitled-list" ? "page" : undefined}
           className="relative mx-2 my-0.5 flex w-[calc(100%-16px)] cursor-pointer items-center rounded-sm border-none px-4 py-2 text-left transition-colors duration-100 focus:outline-none"
           style={{
@@ -175,13 +177,13 @@ const Navigation = ({
           </span>
           {taskCounts["untitled-list"] !== undefined &&
             taskCounts["untitled-list"] > 0 && (
-            <span
-              className="ml-8 text-[12px]"
-              style={{ color: navColors.textSecondary }}
-            >
-              {taskCounts["untitled-list"]}
-            </span>
-          )}
+              <span
+                className="ml-8 text-[12px]"
+                style={{ color: navColors.textSecondary }}
+              >
+                {taskCounts["untitled-list"]}
+              </span>
+            )}
         </button>
       </div>
 
