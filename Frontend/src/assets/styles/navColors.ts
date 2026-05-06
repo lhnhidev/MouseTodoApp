@@ -1,4 +1,4 @@
-export const Nav_colors = {
+export const navColors = {
   navigationBg: "#ffffff",
   navigationText: "#000000",
   textSecondary: "#605e5d",
