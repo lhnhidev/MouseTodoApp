@@ -11,7 +11,7 @@ import {
   UnorderedListOutlined
 } from "@ant-design/icons"
 import { HiOutlineRectangleGroup } from "react-icons/hi2"
-import { navColors } from "../../assets/styles/navColors"
+import { Nav_colors } from "../../assets/styles/Nav_colors"
 
 export type NavigationItemConfig = {
   key: string
@@ -32,31 +32,31 @@ export const navigationItems: NavigationItemConfig[] = [
   {
     key: "my-day",
     label: "Ngày của Tôi",
-    icon: <SunOutlined style={{ color: navColors.iconSun }} />,
+    icon: <SunOutlined style={{ color: Nav_colors.iconSun }} />,
     count: 0
   },
   {
     key: "important",
     label: "Quan trọng",
-    icon: <StarOutlined style={{ color: navColors.iconStar }} />,
+    icon: <StarOutlined style={{ color: Nav_colors.iconStar }} />,
     count: 0
   },
   {
     key: "planned",
     label: "Đã lập kế hoạch",
-    icon: <CalendarOutlined style={{ color: navColors.iconPlanned }} />,
+    icon: <CalendarOutlined style={{ color: Nav_colors.iconPlanned }} />,
     count: 0
   },
   {
     key: "assigned",
     label: "Đã giao cho tôi",
-    icon: <UserOutlined style={{ color: navColors.iconAssigned }} />,
+    icon: <UserOutlined style={{ color: Nav_colors.iconAssigned }} />,
     count: 0
   },
   {
     key: "tasks",
     label: "Tác vụ",
-    icon: <HomeOutlined style={{ color: navColors.iconTasks }} />,
+    icon: <HomeOutlined style={{ color: Nav_colors.iconTasks }} />,
     count: 0
   }
 ]
