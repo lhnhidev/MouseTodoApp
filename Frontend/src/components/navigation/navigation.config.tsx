@@ -13,7 +13,7 @@ import {
 import { HiOutlineRectangleGroup } from "react-icons/hi2"
 import { Nav_colors } from "../../assets/styles/Nav_colors"
 
-export interface NavigationItemConfig {
+export type NavigationItemConfig = {
   key: string;
   label: string;
   icon: React.ReactNode;
