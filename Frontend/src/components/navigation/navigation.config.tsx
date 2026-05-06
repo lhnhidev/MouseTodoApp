@@ -1,4 +1,4 @@
-import React from "react"
+import type { ReactNode } from "react"
 import {
   SunOutlined,
   StarOutlined,
@@ -14,10 +14,10 @@ import { HiOutlineRectangleGroup } from "react-icons/hi2"
 import { Nav_colors } from "../../assets/styles/Nav_colors"
 
 export type NavigationItemConfig = {
-  key: string;
-  label: string;
-  icon: React.ReactNode;
-  count?: number;
+  key: string
+  label: string
+  icon: ReactNode
+  count?: number
 }
 
 export const NAV_ICONS = {

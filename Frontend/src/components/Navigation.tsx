@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Avatar, Input, Divider } from "antd"
 import { Nav_colors } from "../assets/styles/Nav_colors"
 import { navigationItems, NAV_ICONS } from "./navigation/navigation.config"
@@ -16,12 +16,12 @@ type NavigationProps = {
   taskCounts?: Record<string, number>
 }
 
-const Navigation: React.FC<NavigationProps> = ({
+const Navigation = ({
   activeKey,
   onSelect,
   user,
   taskCounts = {}
-}) => {
+}: NavigationProps) => {
   const isElectron = typeof window !== "undefined" && "electronAPI" in window
   const [isSearchHovered, setIsSearchHovered] = useState(false)
   const [isIconHovered, setIsIconHovered] = useState(false)
@@ -64,19 +64,27 @@ const Navigation: React.FC<NavigationProps> = ({
           <Input
             placeholder="Tìm kiếm"
             variant="borderless"
-            className="h-8 rounded-[2px] !border-[0.1px] !border-b-[1.75px] !border-[#8a8a8a] !border-b-black pr-9 pl-[10px] text-sm shadow-[inset_0_1px_1px_rgba(0,0,0,0.05)] transition-colors duration-100 hover:bg-[#f3f2f1] focus:bg-white"
+            className="h-8 rounded-[2px] !border-[0.1px] !border-b-[1.75px] !border-[#8a8a8a] !border-b-black pr-9 pl-[10px] text-sm shadow-[inset_0_1px_1px_rgba(0,0,0,0.05)] transition-colors duration-100 focus:bg-white"
             style={{
-              backgroundColor: isSearchHovered ? "#f3f2f1" : "#ffffff"
+              backgroundColor: isSearchHovered
+                ? Nav_colors.searchHoverBg
+                : Nav_colors.navigationBg
             }}
           />
           <div
             onMouseEnter={() => setIsIconHovered(true)}
             onMouseLeave={() => setIsIconHovered(false)}
-            className={`absolute top-1 right-1 bottom-[6px] flex w-7 cursor-pointer items-center justify-center rounded-[4px] transition-colors duration-200 ${
-              isIconHovered ? "bg-[#edebe9]" : "bg-transparent"
-            }`}
+            className="absolute top-1 right-1 bottom-[6px] flex w-7 cursor-pointer items-center justify-center rounded-[4px] transition-colors duration-200"
+            style={{
+              backgroundColor: isIconHovered
+                ? Nav_colors.activeBg
+                : "transparent"
+            }}
           >
-            <NAV_ICONS.Search className="text-sm text-[#1A1A1A]" />
+            <NAV_ICONS.Search
+              style={{ color: Nav_colors.searchIcon }}
+              className="text-sm"
+            />
           </div>
         </div>
       </div>
@@ -84,10 +92,12 @@ const Navigation: React.FC<NavigationProps> = ({
       {/* Navigation Items */}
       <div className="flex-1 overflow-y-auto">
         {navigationItems.map((item) => (
-          <div
+          <button
             key={item.key}
+            type="button"
             onClick={() => onSelect(item.key)}
-            className="relative mx-2 my-[2px] flex cursor-pointer items-center rounded-[4px] px-4 py-2 transition-colors duration-100"
+            aria-current={item.key === activeKey ? "page" : undefined}
+            className="relative mx-2 my-[2px] flex w-[calc(100%-16px)] cursor-pointer items-center rounded-[4px] border-none px-4 py-2 text-left transition-colors duration-100 focus:outline-none"
             style={{
               backgroundColor:
                 item.key === activeKey ? Nav_colors.activeBg : "transparent",
@@ -112,7 +122,7 @@ const Navigation: React.FC<NavigationProps> = ({
             )}
 
             <span className="mr-4 flex text-[18px]">{item.icon}</span>
-            <span className="flex-1 text-sm">{item.label}</span>
+            <span className="flex-1 text-sm font-normal">{item.label}</span>
             {taskCounts[item.key] !== undefined && taskCounts[item.key] > 0 && (
               <span
                 className="ml-2 text-[12px]"
@@ -121,23 +131,18 @@ const Navigation: React.FC<NavigationProps> = ({
                 {taskCounts[item.key]}
               </span>
             )}
-          </div>
+          </button>
         ))}
 
         <Divider style={{ margin: "8px 0" }} />
 
-        <div
+        <button
           key="untitled-list"
+          type="button"
           onClick={() => onSelect("untitled-list")}
+          aria-current={activeKey === "untitled-list" ? "page" : undefined}
+          className="relative mx-2 my-[2px] flex w-[calc(100%-16px)] cursor-pointer items-center rounded-[4px] border-none px-4 py-2 text-left transition-colors duration-100 focus:outline-none"
           style={{
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-            padding: "8px 16px",
-            margin: "2px 8px",
-            borderRadius: 4,
-            cursor: "pointer",
-            transition: "background-color 0.1s",
             backgroundColor:
               activeKey === "untitled-list"
                 ? Nav_colors.activeBg
@@ -157,40 +162,33 @@ const Navigation: React.FC<NavigationProps> = ({
         >
           {activeKey === "untitled-list" && (
             <div
-              style={{
-                position: "absolute",
-                left: 0,
-                top: "25%",
-                bottom: "25%",
-                width: 3,
-                backgroundColor: Nav_colors.activeBar,
-                borderRadius: 2
-              }}
+              className="absolute top-1/4 bottom-1/4 left-0 w-[3px] rounded-[2px]"
+              style={{ backgroundColor: Nav_colors.activeBar }}
             />
           )}
 
-          <span style={{ fontSize: 18, marginRight: 16, display: "flex" }}>
+          <span className="mr-4 flex text-[18px]">
             <NAV_ICONS.UnorderedList style={{ color: Nav_colors.iconList }} />
           </span>
-          <span style={{ flex: 1, fontSize: 14 }}>Danh sách chưa có tên</span>
+          <span className="flex-1 text-sm font-normal">
+            Danh sách chưa có tên
+          </span>
           {taskCounts["untitled-list"] !== undefined &&
             taskCounts["untitled-list"] > 0 && (
             <span
-              style={{
-                fontSize: 12,
-                color: Nav_colors.textSecondary,
-                marginLeft: 8
-              }}
+              className="ml-8 text-[12px]"
+              style={{ color: Nav_colors.textSecondary }}
             >
               {taskCounts["untitled-list"]}
             </span>
           )}
-        </div>
+        </button>
       </div>
 
-      <div className={`px-2 ${isElectron ? "mb-10" : ""}`}>
-        <div
-          className="flex cursor-pointer items-center rounded-[4px] p-[12px_8px] transition-colors duration-100"
+      <div className={`px-2 flex gap-[2px] ${isElectron ? "mb-10" : ""}`}>
+        <button
+          type="button"
+          className="flex-1 flex cursor-pointer items-center rounded-[4px] border-none bg-transparent p-[12px_8px] text-left transition-colors duration-100 focus:outline-none"
           style={{ color: Nav_colors.navigationText }}
           onMouseEnter={(e) =>
             (e.currentTarget.style.backgroundColor = Nav_colors.hoverBg)
@@ -201,8 +199,22 @@ const Navigation: React.FC<NavigationProps> = ({
         >
           <NAV_ICONS.Plus className="mr-4 text-[20px] text-[#181818]" />
           <span className="flex-1 text-[15px] font-normal">Danh sách mới</span>
+        </button>
+        
+        {/* New group icon */}
+        <button
+          type="button"
+          className="flex w-10 cursor-pointer items-center justify-center rounded-[4px] border-none bg-transparent transition-colors duration-100 focus:outline-none"
+          style={{ color: Nav_colors.navigationText }}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.backgroundColor = Nav_colors.hoverBg)
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = "transparent")
+          }
+        >
           <NAV_ICONS.RectangleGroup className="text-[18px] text-[#181818]" />
-        </div>
+        </button>
       </div>
     </div>
   )
