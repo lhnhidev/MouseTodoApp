@@ -6,11 +6,10 @@ MouseTodoApp là một ứng dụng quản lý công việc (Todo App) toàn di�
 
 ## 📝 Danh sách phiên bản
 
-| Phiên bản      | Ngày phát hành   | Mô tả                                 |
-| -------------- | ---------------- | ------------------------------------- |
-| v1.0.0-alpha   | 01/05/2026       | Phiên bản alpha đầu tiên              |
-| -------------- | ---------------- | ------------------------------------- |
-| v1.0.1-alpha   | 04/05/2026       | Cập nhật hạ tầng (Database SqlServer) |
+| Phiên bản    | Ngày phát hành | Mô tả                                 |
+| ------------ | -------------- | ------------------------------------- |
+| v1.0.0-alpha | 01/05/2026     | Phiên bản alpha đầu tiên              |
+| v1.0.1-alpha | 04/05/2026     | Cập nhật hạ tầng (Database SqlServer) |
 
 ---
 
