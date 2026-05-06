@@ -58,6 +58,9 @@ out/
 .stylelintcache
 .vite/
 
+#Electron
+dist-electron/
+
 # ==========================================
 # BACKEND (.NET C# / Clean Architecture)
 # ==========================================

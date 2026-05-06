@@ -13,8 +13,16 @@ const TitleBar = () => {
   const [isMaximized, setIsMaximized] = useState(() => getIsWindowMaximized())
 
   useEffect(() => {
-    window.electronAPI.onMaximized(() => setIsMaximized(true))
-    window.electronAPI.onUnmaximized(() => setIsMaximized(false))
+    const unsubscribeMaximized = window.electronAPI.onMaximized(() =>
+      setIsMaximized(true)
+    )
+    const unsubscribeUnmaximized = window.electronAPI.onUnmaximized(() =>
+      setIsMaximized(false)
+    )
+    return () => {
+      unsubscribeMaximized()
+      unsubscribeUnmaximized()
+    }
   }, [])
 
   return (
