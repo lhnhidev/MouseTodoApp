@@ -1,3 +1,4 @@
+using MouseTodoApp.Domain.Exceptions;
 using MouseTodoApp.Domain.Extensions;
 using System;
 using System.Collections.Generic;
@@ -54,23 +55,34 @@ namespace MouseTodoApp.Domain.Entities
                 DueDate = dueDate;
             }
 
-            if (reminderTime.HasValue)
-            {
-                var validatedReminderTime = reminderTime.Value.ThrowIfPastDate(nameof(reminderTime));
+            //if (reminderTime.HasValue)
+            //{
+            //    var validatedReminderTime = reminderTime.Value.ThrowIfPastDate(nameof(reminderTime));
 
-                if (dueDate.HasValue)
-                {
-                    ReminderTime = validatedReminderTime.ThrowIfAfterTheTimeline(dueDate.Value, nameof(reminderTime));
-                }
-                else
-                {
-                    ReminderTime = validatedReminderTime;
-                }
-            }
-            else
+            //    if (dueDate.HasValue)
+            //    {
+            //        ReminderTime = validatedReminderTime.ThrowIfAfterTheTimeline(dueDate.Value, nameof(reminderTime));
+            //    }
+            //    else
+            //    {
+            //        ReminderTime = validatedReminderTime;
+            //    }
+            //}
+            //else
+            //{
+            //    ReminderTime = reminderTime;
+            //}
+
+            dueDate?.ThrowIfPastDate(nameof(dueDate));
+            reminderTime?.ThrowIfPastDate(nameof(reminderTime));
+
+            if (reminderTime.HasValue && dueDate.HasValue && reminderTime > dueDate)
             {
-                ReminderTime = reminderTime;
+                throw new Exception("Thời gian nhắc nhở không được sau hạn chót!");
             }
+
+            DueDate = dueDate;
+            ReminderTime = reminderTime;
 
             Note = note;
             IsCompleted = false;
