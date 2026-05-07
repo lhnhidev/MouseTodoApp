@@ -17,7 +17,7 @@ namespace MouseTodoApp.Adapters.Repositories
             _context = context;
         }
 
-        public async Task<List<TodoItem>> GetAllTodoItem()
+        public async Task<List<TodoItem>> GetAllTodoItemsAsync()
         {
             var todoList = await _context.TodoItems.ToListAsync();
             return todoList;

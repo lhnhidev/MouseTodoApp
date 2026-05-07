@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MouseTodoApp.Application.Features.TodoItemFeature.Query;
+using MouseTodoApp.Application.Features.TodoItemFeautre.Query;
 
 namespace MouseTodoApp.WebAPI.Controllers
 {

@@ -27,6 +27,9 @@ builder.Services.AddMediatR(cfg => {
     cfg.RegisterServicesFromAssembly(typeof(MouseTodoApp.Application.DTOs.TodoItemResponseDTO).Assembly);
 });
 
+// Đăng ký AutoMapper
+builder.Services.AddAutoMapper(_ => { }, typeof(MouseTodoApp.Application.Mapping.MappingProfile).Assembly);
+
 // Đăng ký Controllers và cấu hình route convention
 builder.Services.AddControllers(options =>
 {
