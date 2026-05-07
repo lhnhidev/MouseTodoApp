@@ -1,3 +1,4 @@
+using MouseTodoApp.Domain.Exceptions;
 using MouseTodoApp.Domain.Extensions;
 using System;
 using System.Collections.Generic;
@@ -45,32 +46,16 @@ namespace MouseTodoApp.Domain.Entities
 
             TodoListId = todoListId;
 
-            if (dueDate.HasValue)
+            var checkedDueDate = dueDate?.ThrowIfPastDate(nameof(dueDate));
+            var checkedReminderTime = reminderTime?.ThrowIfPastDate(nameof(reminderTime));
+
+            if (checkedReminderTime.HasValue && checkedDueDate.HasValue)
             {
-                DueDate = dueDate.Value.ThrowIfPastDate(nameof(dueDate));
-            }
-            else
-            {
-                DueDate = dueDate;
+                checkedReminderTime = checkedReminderTime.Value.ThrowIfAfterTheTimeline(checkedDueDate.Value, nameof(reminderTime));
             }
 
-            if (reminderTime.HasValue)
-            {
-                var validatedReminderTime = reminderTime.Value.ThrowIfPastDate(nameof(reminderTime));
-
-                if (dueDate.HasValue)
-                {
-                    ReminderTime = validatedReminderTime.ThrowIfAfterTheTimeline(dueDate.Value, nameof(reminderTime));
-                }
-                else
-                {
-                    ReminderTime = validatedReminderTime;
-                }
-            }
-            else
-            {
-                ReminderTime = reminderTime;
-            }
+            DueDate = checkedDueDate;
+            ReminderTime = checkedReminderTime;
 
             Note = note;
             IsCompleted = false;
