@@ -46,43 +46,16 @@ namespace MouseTodoApp.Domain.Entities
 
             TodoListId = todoListId;
 
-            if (dueDate.HasValue)
+            var validatedDueDate = dueDate?.ThrowIfPastDate(nameof(dueDate));
+            var validatedReminderTime = reminderTime?.ThrowIfPastDate(nameof(reminderTime));
+
+            if (validatedReminderTime.HasValue && validatedDueDate.HasValue)
             {
-                DueDate = dueDate.Value.ThrowIfPastDate(nameof(dueDate));
-            }
-            else
-            {
-                DueDate = dueDate;
-            }
-
-            //if (reminderTime.HasValue)
-            //{
-            //    var validatedReminderTime = reminderTime.Value.ThrowIfPastDate(nameof(reminderTime));
-
-            //    if (dueDate.HasValue)
-            //    {
-            //        ReminderTime = validatedReminderTime.ThrowIfAfterTheTimeline(dueDate.Value, nameof(reminderTime));
-            //    }
-            //    else
-            //    {
-            //        ReminderTime = validatedReminderTime;
-            //    }
-            //}
-            //else
-            //{
-            //    ReminderTime = reminderTime;
-            //}
-
-            dueDate?.ThrowIfPastDate(nameof(dueDate));
-            reminderTime?.ThrowIfPastDate(nameof(reminderTime));
-
-            if (reminderTime.HasValue && dueDate.HasValue && reminderTime > dueDate)
-            {
-                throw new Exception("Thời gian nhắc nhở không được sau hạn chót!");
+                validatedReminderTime = validatedReminderTime.Value.ThrowIfAfterTheTimeline(validatedDueDate.Value, nameof(reminderTime));
             }
 
-            DueDate = dueDate;
-            ReminderTime = reminderTime;
+            DueDate = validatedDueDate;
+            ReminderTime = validatedReminderTime;
 
             Note = note;
             IsCompleted = false;
