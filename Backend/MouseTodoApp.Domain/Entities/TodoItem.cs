@@ -46,16 +46,16 @@ namespace MouseTodoApp.Domain.Entities
 
             TodoListId = todoListId;
 
-            var validatedDueDate = dueDate?.ThrowIfPastDate(nameof(dueDate));
-            var validatedReminderTime = reminderTime?.ThrowIfPastDate(nameof(reminderTime));
+            var checkedDueDate = dueDate?.ThrowIfPastDate(nameof(dueDate));
+            var checkedReminderTime = reminderTime?.ThrowIfPastDate(nameof(reminderTime));
 
-            if (validatedReminderTime.HasValue && validatedDueDate.HasValue)
+            if (checkedReminderTime.HasValue && checkedDueDate.HasValue)
             {
-                validatedReminderTime = validatedReminderTime.Value.ThrowIfAfterTheTimeline(validatedDueDate.Value, nameof(reminderTime));
+                checkedReminderTime = checkedReminderTime.Value.ThrowIfAfterTheTimeline(checkedDueDate.Value, nameof(reminderTime));
             }
 
-            DueDate = validatedDueDate;
-            ReminderTime = validatedReminderTime;
+            DueDate = checkedDueDate;
+            ReminderTime = checkedReminderTime;
 
             Note = note;
             IsCompleted = false;
