@@ -26,7 +26,13 @@ namespace MouseTodoApp.Adapters.Repositories
         public async Task<TodoItem> GetTodoItemByIdAsync(Guid id)
         {
             var todoItem = await _context.TodoItems.FindAsync(id);
-            return todoItem == null ? throw new Exception("") : todoItem;
+
+            if (todoItem == null)
+            {
+                throw new Exception("Not found");
+            }
+
+            return todoItem;
         }
     }
 }
