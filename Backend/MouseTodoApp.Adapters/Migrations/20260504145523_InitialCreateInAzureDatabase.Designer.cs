@@ -12,8 +12,8 @@ using MouseTodoApp.Adapters.Persistence.Context;
 namespace MouseTodoApp.Adapters.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260503190642_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20260504145523_InitialCreateInAzureDatabase")]
+    partial class InitialCreateInAzureDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

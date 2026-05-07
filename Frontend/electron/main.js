@@ -76,8 +76,12 @@ const setupIPC = () => {
 // Hàm đăng ký phím tắt
 const setupShortcut = (win) => {
   // Đăng ký phím tắt Ctrl + Shift + R
-  const ret = globalShortcut.register("CommandOrControl+Shift+R", () => {
+  globalShortcut.register("CommandOrControl+Shift+R", () => {
     win.reload()
+  })
+
+  globalShortcut.register("CommandOrControl+Shift+I", () => {
+    win.openDevTools()
   })
 
   // if (!ret) {
