@@ -1,11 +1,8 @@
 using MediatR;
-using Microsoft.VisualBasic;
 using MouseTodoApp.Application.DTOs;
 using MouseTodoApp.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using static System.Net.WebRequestMethods;
 
 namespace MouseTodoApp.Application.Features.TodoItemFeautre.Query
 {
