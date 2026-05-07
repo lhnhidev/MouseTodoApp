@@ -1,8 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MouseTodoApp.Application.Features.TodoItemFeautre.Query;
-using MouseTodoApp.Domain.Interfaces;
-using System.Reflection.Metadata.Ecma335;
 
 namespace MouseTodoApp.WebAPI.Controllers
 {
