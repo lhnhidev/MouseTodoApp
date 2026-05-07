@@ -5,7 +5,7 @@ using MouseTodoApp.Domain.Interfaces;
 
 namespace MouseTodoApp.Application.Features.TodoItemFeautre.Query
 {
-    public record GetTodoItemByIdQuery(Guid todoItemId) : IRequest<TodoItemResponseDTO>;
+    public record GetTodoItemByIdQuery(Guid TodoItemId) : IRequest<TodoItemResponseDTO>;
     public class GetTodoItemHandler : IRequestHandler<GetTodoItemByIdQuery, TodoItemResponseDTO>
     {
         private readonly ITodoItemRepository _repo;
@@ -19,7 +19,7 @@ namespace MouseTodoApp.Application.Features.TodoItemFeautre.Query
 
         public async Task<TodoItemResponseDTO> Handle(GetTodoItemByIdQuery request, CancellationToken cancellationToken)
         {
-            var todoItemId = request.todoItemId;
+            var todoItemId = request.TodoItemId;
 
             var todoItemEntity = await _repo.GetTodoItemByIdAsync(todoItemId);
             var todoItem = _mapper.Map<TodoItemResponseDTO>(todoItemEntity);
