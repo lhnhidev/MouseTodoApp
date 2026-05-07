@@ -44,7 +44,7 @@ app.whenReady().then(() => {
   setupIPC()
 })
 
-function setupIPC() {
+const setupIPC = () => {
   ipcMain.removeAllListeners("window-minimize")
   ipcMain.removeAllListeners("window-maximize")
   ipcMain.removeAllListeners("window-close")
