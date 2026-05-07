@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MouseTodoApp.Domain.Entities;
 
-namespace MouseTodoApp.Adapters
+namespace MouseTodoApp.Adapters.Persistence.Context
 {
     public class ApplicationDbContext : DbContext
     {

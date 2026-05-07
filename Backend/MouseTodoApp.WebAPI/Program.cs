@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using MouseTodoApp.Adapters;
+using MouseTodoApp.Adapters.Persistence.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
