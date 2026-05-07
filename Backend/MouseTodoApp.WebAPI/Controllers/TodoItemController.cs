@@ -24,6 +24,12 @@ namespace MouseTodoApp.WebAPI.Controllers
         public async Task<IActionResult> GetTodoItemById([FromRoute] Guid id)
         {
             var todoItem = await _mediator.Send(new GetTodoItemByIdQuery(id));
+
+            if (todoItem == null)
+            {
+                return NotFound($"Không tìm thấy TodoItem có id: {id}");
+            }
+
             return Ok(todoItem);
         }
     }
