@@ -23,10 +23,11 @@ namespace MouseTodoApp.Adapters.Repositories
             return todoList;
         }
 
-        public async Task<TodoItem> GetTodoItemByIdAsync(Guid id)
+        public async Task<TodoItem?> GetTodoItemByIdAsync(Guid id)
         {
             var todoItem = await _context.TodoItems.FindAsync(id);
-            return todoItem == null ? throw new Exception("") : todoItem;
+
+            return todoItem;
         }
     }
 }

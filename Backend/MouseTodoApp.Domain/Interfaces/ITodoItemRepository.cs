@@ -8,6 +8,6 @@ namespace MouseTodoApp.Domain.Interfaces
     public interface ITodoItemRepository
     {
         public Task<List<TodoItem>> GetAllTodoItemsAsync();
-        public Task<TodoItem> GetTodoItemByIdAsync(Guid id);
+        public Task<TodoItem?> GetTodoItemByIdAsync(Guid id);
     }
 }

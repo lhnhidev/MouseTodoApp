@@ -20,11 +20,17 @@ namespace MouseTodoApp.WebAPI.Controllers
             return Ok(result);
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetTodoItemById([FromRoute] Guid id)
-        //{
-        //    var todoItem = await _todoItemRepo.GetTodoItemByIdAsync(id);
-        //    return Ok(todoItem);
-        //}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTodoItemById([FromRoute] Guid id)
+        {
+            var todoItem = await _mediator.Send(new GetTodoItemByIdQuery(id));
+
+            if (todoItem == null)
+            {
+                return NotFound($"Không tìm thấy TodoItem có id: {id}");
+            }
+
+            return Ok(todoItem);
+        }
     }
 }
