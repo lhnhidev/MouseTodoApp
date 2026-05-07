@@ -1,7 +1,19 @@
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using MouseTodoApp.Adapters;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Đăng ký dịch vụ Swagger cho các Controller
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers(options =>
+{
+    // Áp dụng transformer cho tất cả các đường dẫn
+    options.Conventions.Add(new RouteTokenTransformerConvention(new KebabCaseParameterTransformer()));
+});
 
 // Cấu hình CORS (Cho phép React gọi API mà không bị chặn)
 builder.Services.AddCors(options =>
@@ -19,6 +31,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(); // Mặc định sẽ chạy tại đường dẫn /swagger
+}
+
+app.UseHttpsRedirection();
+app.UseAuthorization();
+
+app.MapControllers();
+app.MapFallbackToFile("/index.html");
+
 app.UseCors();
 
 app.Run();
