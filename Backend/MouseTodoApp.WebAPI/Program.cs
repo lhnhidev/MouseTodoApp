@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using MouseTodoApp.Adapters;
+using MouseTodoApp.Adapters.Persistence.Context;
 using MouseTodoApp.Adapters.Repositories;
 using MouseTodoApp.Application.Interfaces;
 using MouseTodoApp.Domain.Interfaces;
