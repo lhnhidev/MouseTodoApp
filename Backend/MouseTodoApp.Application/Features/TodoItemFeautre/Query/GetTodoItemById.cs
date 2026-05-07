@@ -6,12 +6,12 @@ using MouseTodoApp.Domain.Interfaces;
 namespace MouseTodoApp.Application.Features.TodoItemFeautre.Query
 {
     public record GetTodoItemByIdQuery(Guid TodoItemId) : IRequest<TodoItemResponseDTO>;
-    public class GetTodoItemHandler : IRequestHandler<GetTodoItemByIdQuery, TodoItemResponseDTO>
+    public class GetTodoItemByIdHandler : IRequestHandler<GetTodoItemByIdQuery, TodoItemResponseDTO>
     {
         private readonly ITodoItemRepository _repo;
         private readonly IMapper _mapper;
 
-        public GetTodoItemHandler(ITodoItemRepository repo, IMapper mapper)
+        public GetTodoItemByIdHandler(ITodoItemRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
