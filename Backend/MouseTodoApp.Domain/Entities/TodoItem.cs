@@ -1,4 +1,3 @@
-using MouseTodoApp.Domain.Exceptions;
 using MouseTodoApp.Domain.Extensions;
 using System;
 using System.Collections.Generic;
