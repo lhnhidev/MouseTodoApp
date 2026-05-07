@@ -1,4 +1,11 @@
-import { app, BrowserWindow, screen, Menu, ipcMain } from "electron"
+import {
+  app,
+  BrowserWindow,
+  screen,
+  Menu,
+  ipcMain,
+  globalShortcut
+} from "electron"
 import * as path from "path"
 import isDev from "electron-is-dev"
 
@@ -7,6 +14,7 @@ import { fileURLToPath } from "url"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// Hàm tạo Window cho app
 const createWindow = () => {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize
 
@@ -37,13 +45,11 @@ const createWindow = () => {
   } else {
     win.loadFile(path.join(__dirname, "../dist/index.html"))
   }
+
+  setupShortcut(win)
 }
 
-app.whenReady().then(() => {
-  createWindow()
-  setupIPC()
-})
-
+// Hàm đăng ký sự kiện cho Window
 const setupIPC = () => {
   ipcMain.removeAllListeners("window-minimize")
   ipcMain.removeAllListeners("window-maximize")
@@ -67,6 +73,24 @@ const setupIPC = () => {
   })
 }
 
+// Hàm đăng ký phím tắt
+const setupShortcut = (win) => {
+  // Đăng ký phím tắt Ctrl + Shift + R
+  const ret = globalShortcut.register("CommandOrControl+Shift+R", () => {
+    win.reload()
+  })
+
+  // if (!ret) {
+  //   console.log("Đăng ký phím tắt thất bại")
+  // }
+}
+
+app.whenReady().then(() => {
+  createWindow()
+  setupIPC()
+})
+
+// Một số sự kiện bên lề của ứng dụng
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit()
