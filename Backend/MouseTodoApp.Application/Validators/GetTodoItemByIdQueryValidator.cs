@@ -11,7 +11,6 @@ namespace MouseTodoApp.Application.Validators
         public GetTodoItemByIdQueryValidator()
         {
             RuleFor(x => x.TodoItemId)
-                .NotNull().WithMessage("TodoItemId không được NULL")
                 .NotEmpty().WithMessage("TodoItemId không được rỗng");
         }
     }
