@@ -38,16 +38,9 @@ namespace MouseTodoApp.WebAPI.Controllers
         [HttpPost("{todoListId}")]
         public async Task<IActionResult> CreateTodoItemByIdOfTodoList([FromBody] CreateTodoItemByIdOfTodoListCommand todoItemRequest, [FromRoute] Guid todoListId)
         {
-            try
-            {
-                var command = todoItemRequest with { TodoListId = todoListId };
-                var todoItem = await _mediator.Send(command);
-                return CreatedAtAction(nameof(GetTodoItemById), new { id = todoItem.Id }, todoItem);
-            }
-            catch
-            {
-                return NotFound($"Not found TodoList with id: {todoListId}");
-            }
+            var command = todoItemRequest with { TodoListId = todoListId };
+            var todoItem = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetTodoItemById), new { id = todoItem.Id }, todoItem);
         }
     }
 }
