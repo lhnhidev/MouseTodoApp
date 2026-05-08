@@ -20,7 +20,7 @@ namespace MouseTodoApp.Adapters.Repositories
         public async Task CreateTodoItemAsync(TodoItem todoItem)
         {
             await _context.TodoItems.AddAsync(todoItem);
-            await SaveChanges();
+            await SaveChangesAsync();
         }
 
         public async Task<List<TodoItem>> GetAllTodoItemsAsync()
@@ -36,7 +36,7 @@ namespace MouseTodoApp.Adapters.Repositories
             return todoItem;
         }
 
-        public async Task SaveChanges()
+        public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }
