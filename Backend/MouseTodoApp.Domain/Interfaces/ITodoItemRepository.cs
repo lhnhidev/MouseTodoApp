@@ -10,6 +10,6 @@ namespace MouseTodoApp.Domain.Interfaces
         public Task<List<TodoItem>> GetAllTodoItemsAsync();
         public Task<TodoItem?> GetTodoItemByIdAsync(Guid id);
         public Task CreateTodoItemAsync(TodoItem todoItem);
-        public Task SaveChanges();
+        public Task SaveChangesAsync();
     }
 }
