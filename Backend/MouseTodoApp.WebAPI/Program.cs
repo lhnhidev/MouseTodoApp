@@ -43,6 +43,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
 builder.Services.AddScoped<ITodoItemRepository, TodoItemRepository>();
+builder.Services.AddScoped<ITodoListRepository, TodoListRepository>();
 
 var app = builder.Build();
 
