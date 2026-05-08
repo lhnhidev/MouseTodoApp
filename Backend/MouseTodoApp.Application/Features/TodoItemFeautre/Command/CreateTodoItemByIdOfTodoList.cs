@@ -13,7 +13,6 @@ namespace MouseTodoApp.Application.Features.TodoItemFeautre.Command
         [property: JsonIgnore] Guid TodoListId,
         string Title,
         string? Note,
-        bool IsCompleted,
         bool IsImportantCategory,
         bool IsInMyDayCategory,
         bool IsPlannedCategory,
