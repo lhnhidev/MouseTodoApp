@@ -4,7 +4,6 @@ type TodoItemProps = {
   title: string
   isCompleted?: boolean
   isImportant?: boolean
-  listName?: string
 }
 
 const TodoItem = ({
