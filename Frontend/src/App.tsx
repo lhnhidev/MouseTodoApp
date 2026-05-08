@@ -1,11 +1,21 @@
 import { useState } from "react"
 import Navigation from "./components/Navigation"
+import UntitledListView from "./views/UntitledListView"
+import { navigationItems } from "./components/navigation/navigation.config"
 import TitleBar from "./components/TitleBar"
 
 const App = () => {
   const hasElectronAPI =
     typeof window !== "undefined" && "electronAPI" in window
   const [activeKey, setActiveKey] = useState("my-day")
+
+  const getActiveLabel = () => {
+    if (activeKey === "untitled-list") {
+      return "Danh sách chưa có tên"
+    }
+    const item = navigationItems.find((i) => i.key === activeKey)
+    return item ? item.label : "Danh sách chưa có tên"
+  }
 
   return (
     <div
@@ -22,9 +32,18 @@ const App = () => {
 
       <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
         <Navigation activeKey={activeKey} onSelect={setActiveKey} />
-        <div style={{ flex: 1, padding: "16px" }}>
-          <h1 className="text-md">Ứng dụng Todo App nè</h1>
-        </div>
+        {activeKey === "untitled-list" ? (
+          <UntitledListView listName={getActiveLabel()} />
+        ) : (
+          <div className="flex flex-1 flex-col bg-white p-8">
+            <h1 className="text-2xl font-bold text-gray-800">
+              {getActiveLabel()}
+            </h1>
+            <p className="mt-4 text-gray-500">
+              Nội dung cho danh sách này đang được phát triển...
+            </p>
+          </div>
+        )}
       </div>
     </div>
   )
