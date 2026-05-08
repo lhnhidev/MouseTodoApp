@@ -2,9 +2,9 @@ import { useState, type CSSProperties } from "react"
 import {
   HiEllipsisHorizontal,
   HiOutlineShare,
-  HiOutlineRectangleGroup,
   HiChevronDown
 } from "react-icons/hi2"
+import { TbTransitionTop } from "react-icons/tb"
 import TodoItem from "../components/TodoItem"
 import { untitledListColors } from "../assets/styles/untitledListColors"
 
@@ -61,7 +61,7 @@ const UntitledListView = ({ listName }: UntitledListViewProps) => {
               (e.currentTarget.style.backgroundColor = "transparent")
             }
           >
-            <HiOutlineRectangleGroup className="text-lg" />
+            <TbTransitionTop className="text-lg" />
           </button>
           <button
             className="rounded p-1.5 transition-colors"
