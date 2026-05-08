@@ -81,7 +81,6 @@ const UntitledListView = ({ listName }: UntitledListViewProps) => {
       {/* Nội dung */}
       <div className="scrollbar-hide flex-1 overflow-y-auto px-4 pt-2 pb-24">
         <div className="mx-auto max-w-full space-y-4">
-          {/* Completed Section Toggle */}
           {completedTodos.length > 0 && (
             <div className="mb-2">
               <button
