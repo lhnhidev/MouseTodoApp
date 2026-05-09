@@ -1,8 +1,7 @@
+using AutoMapper;
 using MediatR;
 using MouseTodoApp.Application.DTOs;
 using MouseTodoApp.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
 
 namespace MouseTodoApp.Application.Features.TodoItemFeautre.Query
 {
@@ -10,27 +9,18 @@ namespace MouseTodoApp.Application.Features.TodoItemFeautre.Query
     public class GetTodoItemsHandler : IRequestHandler<GetTodoItemsQuery, List<TodoItemResponseDTO>>
     {
         private readonly ITodoItemRepository _repo;
+        private readonly IMapper _mapper;
 
-        public GetTodoItemsHandler(ITodoItemRepository repo)
+        public GetTodoItemsHandler(ITodoItemRepository repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
         public async Task<List<TodoItemResponseDTO>> Handle(GetTodoItemsQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _repo.GetAllTodoItem();
-            return entities.Select(x => new TodoItemResponseDTO(
-                x.Id,
-                x.Title,
-                x.Note,
-                x.IsCompleted,
-                x.IsImportantCategory,
-                x.IsInMyDayCategory,
-                x.IsPlannedCategory,
-                x.IsAssignedCategory,
-                x.DueDate,
-                x.ReminderTime)
-            ).ToList();
+            var entities = await _repo.GetAllTodoItemsAsync();
+            return _mapper.Map<List<TodoItemResponseDTO>>(entities);
         }
     }
 }
