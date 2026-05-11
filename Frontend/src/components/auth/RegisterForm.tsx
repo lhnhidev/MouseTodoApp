@@ -17,6 +17,7 @@ import {
   ArrowLeftOutlined,
   CheckOutlined
 } from "@ant-design/icons"
+import Stepper from "../commons/Stepper.tsx"
 
 interface IRegisterForm {
   username: string
@@ -27,9 +28,9 @@ interface IRegisterForm {
 }
 
 const STEPS = [
-  { label: "Định danh" },
-  { label: "Liên lạc" },
-  { label: "Bảo mật" }
+  { id: "step-identity", label: "Định danh" },
+  { id: "step-contact", label: "Liên lạc" },
+  { id: "step-security", label: "Bảo mật" }
 ]
 
 const RegisterForm = () => {
@@ -71,13 +72,12 @@ const RegisterForm = () => {
 
   const prev = () => setCurrentStep((s) => s - 1)
 
-  const onSubmit: SubmitHandler<IRegisterForm> = (data) => {
-    // eslint-disable-next-line no-console
-    console.log("Đăng ký thành công:", data)
+  const onSubmit: SubmitHandler<IRegisterForm> = () => {
+    alert("Đăng ký thành công")
   }
 
   const inputClassName =
-    "h-11 rounded-sm border-gray-200 hover:border-gray-300 focus:border-gray-900 focus:shadow-none transition-all duration-150"
+    "h-11 rounded-sm border-gray-200! hover:border-gray-300! focus:border-gray-900! focus:shadow-none! transition-all duration-150"
 
   return (
     <Form
@@ -85,41 +85,24 @@ const RegisterForm = () => {
       onFinish={handleSubmit(onSubmit)}
       className="w-full"
     >
-      <div className="mb-6">
-        <div className="mb-2 flex items-center justify-between">
-          <span className="text-xs font-semibold tracking-wide text-gray-900 uppercase">
-            {STEPS[currentStep].label}
-          </span>
-          <span className="text-xs font-medium text-gray-400">
-            Bước {currentStep + 1} / {STEPS.length}
-          </span>
-        </div>
-        <div className="flex gap-1.5">
-          {STEPS.map((_, i) => (
-            <div
-              key={i}
-              className={`h-0.5 flex-1 rounded-full transition-all duration-500 ${
-                i <= currentStep ? "bg-gray-900" : "bg-gray-100"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
+      <Stepper steps={STEPS} currentStep={currentStep} />
 
       <div className="min-h-fit">
         {currentStep === 0 && (
           <div className="animate-in fade-in slide-in-from-right-3 duration-200">
             <Form.Item
               label={
-                <span className="text-sm font-bold text-gray-900">
+                <span className="text-sm font-bold text-(--text-primary-color)">
                   Tên đăng nhập
                 </span>
               }
-              validateStatus={errors.username ? "error" : ""}
+              validateStatus={errors.username ? "error" : undefined}
               help={
-                <span className="text-xs font-medium">
-                  {errors.username?.message}
-                </span>
+                errors.username?.message ? (
+                  <span className="text-xs font-medium">
+                    {errors.username.message}
+                  </span>
+                ) : undefined
               }
               className="mb-0"
             >
@@ -134,9 +117,9 @@ const RegisterForm = () => {
                   <Input
                     {...field}
                     prefix={
-                      <MdOutlinePerson className="mr-1 text-lg text-gray-400" />
+                      <MdOutlinePerson className="mr-1 text-lg text-(--text-secondary-color)" />
                     }
-                    placeholder="Ví dụ: loc_nguyen26"
+                    placeholder="Ví dụ: username001"
                     size="large"
                     className={inputClassName}
                   />
@@ -150,15 +133,17 @@ const RegisterForm = () => {
           <div className="animate-in fade-in slide-in-from-right-3 space-y-5 duration-200">
             <Form.Item
               label={
-                <span className="text-sm font-bold text-gray-900">
+                <span className="text-sm font-bold text-(--text-primary-color)">
                   Địa chỉ email
                 </span>
               }
-              validateStatus={errors.email ? "error" : ""}
+              validateStatus={errors.email ? "error" : undefined}
               help={
-                <span className="text-xs font-medium">
-                  {errors.email?.message}
-                </span>
+                errors.email?.message ? (
+                  <span className="text-xs font-medium">
+                    {errors.email.message}
+                  </span>
+                ) : undefined
               }
               className="mb-0"
             >
@@ -176,7 +161,7 @@ const RegisterForm = () => {
                   <Input
                     {...field}
                     prefix={
-                      <MdOutlineEmail className="mr-1 text-lg text-gray-400" />
+                      <MdOutlineEmail className="mr-1 text-lg text-(--text-secondary-color)" />
                     }
                     placeholder="example@gmail.com"
                     size="large"
@@ -188,18 +173,20 @@ const RegisterForm = () => {
 
             <Form.Item
               label={
-                <span className="text-sm font-bold text-gray-900">
+                <span className="text-sm font-bold text-(--text-primary-color)">
                   Số điện thoại{" "}
-                  <span className="font-normal text-gray-400">
+                  <span className="font-normal text-(--text-secondary-color)">
                     (không bắt buộc)
                   </span>
                 </span>
               }
-              validateStatus={errors.phoneNumber ? "error" : ""}
+              validateStatus={errors.phoneNumber ? "error" : undefined}
               help={
-                <span className="text-xs font-medium">
-                  {errors.phoneNumber?.message}
-                </span>
+                errors.phoneNumber?.message ? (
+                  <span className="text-xs font-medium">
+                    {errors.phoneNumber.message}
+                  </span>
+                ) : undefined
               }
               className="mb-0"
             >
@@ -216,7 +203,7 @@ const RegisterForm = () => {
                   <Input
                     {...field}
                     prefix={
-                      <MdOutlinePhone className="mr-1 text-lg text-gray-400" />
+                      <MdOutlinePhone className="mr-1 text-lg text-(--text-secondary-color)" />
                     }
                     placeholder="0987xxxxxx"
                     size="large"
@@ -232,15 +219,17 @@ const RegisterForm = () => {
           <div className="animate-in fade-in slide-in-from-right-3 space-y-5 duration-200">
             <Form.Item
               label={
-                <span className="text-sm font-bold text-gray-900">
+                <span className="text-sm font-bold text-(--text-primary-color)">
                   Mật khẩu
                 </span>
               }
-              validateStatus={errors.password ? "error" : ""}
+              validateStatus={errors.password ? "error" : undefined}
               help={
-                <span className="text-xs font-medium">
-                  {errors.password?.message}
-                </span>
+                errors.password?.message ? (
+                  <span className="text-xs font-medium">
+                    {errors.password.message}
+                  </span>
+                ) : undefined
               }
               className="mb-0"
             >
@@ -255,14 +244,11 @@ const RegisterForm = () => {
                   <Input.Password
                     {...field}
                     prefix={
-                      <MdOutlineLock className="mr-1 text-lg text-gray-400" />
+                      <MdOutlineLock className="mr-1 text-lg text-(--text-secondary-color)" />
                     }
                     placeholder="Tối thiểu 6 ký tự"
                     size="large"
                     className={inputClassName}
-                    visibilityToggle={{
-                      visible: false
-                    }}
                   />
                 )}
               />
@@ -270,15 +256,17 @@ const RegisterForm = () => {
 
             <Form.Item
               label={
-                <span className="text-sm font-bold text-gray-900">
+                <span className="text-sm font-bold text-(--text-primary-color)">
                   Xác nhận mật khẩu
                 </span>
               }
-              validateStatus={errors.confirmPassword ? "error" : ""}
+              validateStatus={errors.confirmPassword ? "error" : undefined}
               help={
-                <span className="text-xs font-medium">
-                  {errors.confirmPassword?.message}
-                </span>
+                errors.confirmPassword?.message ? (
+                  <span className="text-xs font-medium">
+                    {errors.confirmPassword.message}
+                  </span>
+                ) : undefined
               }
               className="mb-0"
             >
@@ -294,7 +282,7 @@ const RegisterForm = () => {
                   <Input.Password
                     {...field}
                     prefix={
-                      <MdOutlineLock className="mr-1 text-lg text-gray-400" />
+                      <MdOutlineLock className="mr-1 text-lg text-(--text-secondary-color)" />
                     }
                     placeholder="Nhập lại mật khẩu"
                     size="large"
@@ -314,7 +302,7 @@ const RegisterForm = () => {
             onClick={prev}
             className="flex h-11 shrink-0 items-center gap-2 rounded-sm border border-gray-200 px-5 text-sm font-bold text-gray-700 transition-all hover:bg-gray-50 active:scale-95"
           >
-            <ArrowLeftOutlined style={{ fontSize: 12 }} />
+            <ArrowLeftOutlined className="text-xs" />
             Quay lại
           </button>
         )}
@@ -326,11 +314,11 @@ const RegisterForm = () => {
         >
           {currentStep < 2 ? (
             <>
-              Tiếp theo <ArrowRightOutlined style={{ fontSize: 12 }} />
+              Tiếp theo <ArrowRightOutlined className="text-xs" />
             </>
           ) : (
             <>
-              Hoàn tất đăng ký <CheckOutlined style={{ fontSize: 12 }} />
+              Hoàn tất đăng ký <CheckOutlined className="text-xs" />
             </>
           )}
         </button>

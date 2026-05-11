@@ -8,4 +8,9 @@ body {
   --light-theme-bg: #ffffff;
   --dark-theme-bg: #1a1b1c;
   --window-control-btn-hover: #2d2d2d;
+
+  /* text colors */
+  --text-primary-color: oklch(13% 0.028 261.692);
+  --text-secondary-color: oklch(55.1% 0.027 264.364);
+  --text-placeholder-color: oklch(70.7% 0.022 261.325);
 }
