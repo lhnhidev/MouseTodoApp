@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, type KeyboardEvent } from "react"
 import {
   useForm,
   Controller,
@@ -36,13 +36,7 @@ const STEPS = [
 const RegisterForm = () => {
   const [currentStep, setCurrentStep] = useState(0)
 
-  const {
-    control,
-    handleSubmit,
-    trigger,
-    formState: { errors },
-    watch
-  } = useForm<IRegisterForm>({
+  const { control, handleSubmit, trigger, getValues } = useForm<IRegisterForm>({
     defaultValues: {
       username: "",
       email: "",
@@ -53,8 +47,17 @@ const RegisterForm = () => {
     mode: "onChange"
   })
 
-  const passwordValue = watch("password")
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+      e.preventDefault()
 
+      if (currentStep < STEPS.length - 1) {
+        next()
+      } else {
+        handleSubmit(onSubmit)()
+      }
+    }
+  }
   const next = async () => {
     let fields: Path<IRegisterForm>[] = []
     if (currentStep === 0) {
@@ -73,7 +76,7 @@ const RegisterForm = () => {
   const prev = () => setCurrentStep((s) => s - 1)
 
   const onSubmit: SubmitHandler<IRegisterForm> = () => {
-    alert("Đăng ký thành công")
+    alert("Đăng ký thành công!")
   }
 
   const inputClassName =
@@ -83,214 +86,180 @@ const RegisterForm = () => {
     <Form
       layout="vertical"
       onFinish={handleSubmit(onSubmit)}
+      onKeyDown={handleKeyDown}
       className="w-full"
     >
       <Stepper steps={STEPS} currentStep={currentStep} />
 
-      <div className="min-h-fit">
+      <div className="mt-6">
         {currentStep === 0 && (
           <div className="animate-in fade-in slide-in-from-right-3 duration-200">
-            <Form.Item
-              label={
-                <span className="text-sm font-bold text-(--text-primary-color)">
-                  Tên đăng nhập
-                </span>
-              }
-              validateStatus={errors.username ? "error" : undefined}
-              help={
-                errors.username?.message ? (
-                  <span className="text-xs font-medium">
-                    {errors.username.message}
-                  </span>
-                ) : undefined
-              }
-              className="mb-0"
-            >
-              <Controller
-                name="username"
-                control={control}
-                rules={{
-                  required: "Tên đăng nhập là bắt buộc",
-                  minLength: { value: 3, message: "Tối thiểu 3 ký tự" }
-                }}
-                render={({ field }) => (
+            <Controller
+              name="username"
+              control={control}
+              rules={{
+                required: "Tên đăng nhập là bắt buộc",
+                minLength: { value: 3, message: "Tối thiểu 3 ký tự" }
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <Form.Item
+                  label={
+                    <span className="text-sm font-bold text-(--text-primary-color)">
+                      Tên đăng nhập
+                    </span>
+                  }
+                  validateStatus={error ? "error" : ""}
+                  help={error?.message}
+                  className="mb-0"
+                >
                   <Input
                     {...field}
                     prefix={
                       <MdOutlinePerson className="mr-1 text-lg text-(--text-secondary-color)" />
                     }
                     placeholder="Ví dụ: username001"
-                    size="large"
                     className={inputClassName}
                   />
-                )}
-              />
-            </Form.Item>
+                </Form.Item>
+              )}
+            />
           </div>
         )}
 
         {currentStep === 1 && (
           <div className="animate-in fade-in slide-in-from-right-3 space-y-5 duration-200">
-            <Form.Item
-              label={
-                <span className="text-sm font-bold text-(--text-primary-color)">
-                  Địa chỉ email
-                </span>
-              }
-              validateStatus={errors.email ? "error" : undefined}
-              help={
-                errors.email?.message ? (
-                  <span className="text-xs font-medium">
-                    {errors.email.message}
-                  </span>
-                ) : undefined
-              }
-              className="mb-0"
-            >
-              <Controller
-                name="email"
-                control={control}
-                rules={{
-                  required: "Email là bắt buộc",
-                  pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: "Email không hợp lệ"
+            <Controller
+              name="email"
+              control={control}
+              rules={{
+                required: "Email là bắt buộc",
+                pattern: { value: /^\S+@\S+$/i, message: "Email không hợp lệ" }
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <Form.Item
+                  label={
+                    <span className="text-sm font-bold text-(--text-primary-color)">
+                      Địa chỉ email
+                    </span>
                   }
-                }}
-                render={({ field }) => (
+                  validateStatus={error ? "error" : ""}
+                  help={error?.message}
+                  className="mb-0"
+                >
                   <Input
                     {...field}
                     prefix={
                       <MdOutlineEmail className="mr-1 text-lg text-(--text-secondary-color)" />
                     }
                     placeholder="example@gmail.com"
-                    size="large"
                     className={inputClassName}
                   />
-                )}
-              />
-            </Form.Item>
-
-            <Form.Item
-              label={
-                <span className="text-sm font-bold text-(--text-primary-color)">
-                  Số điện thoại{" "}
-                  <span className="font-normal text-(--text-secondary-color)">
-                    (không bắt buộc)
-                  </span>
-                </span>
-              }
-              validateStatus={errors.phoneNumber ? "error" : undefined}
-              help={
-                errors.phoneNumber?.message ? (
-                  <span className="text-xs font-medium">
-                    {errors.phoneNumber.message}
-                  </span>
-                ) : undefined
-              }
-              className="mb-0"
-            >
-              <Controller
-                name="phoneNumber"
-                control={control}
-                rules={{
-                  pattern: {
-                    value: /^(0[3|5|7|8|9])([0-9]{8})$/,
-                    message: "Số điện thoại không hợp lệ"
+                </Form.Item>
+              )}
+            />
+            <Controller
+              name="phoneNumber"
+              control={control}
+              rules={{
+                required: "Số điện thoại là bắt buộc",
+                pattern: {
+                  value: /^(0[3|5|7|8|9])([0-9]{8})$/,
+                  message: "Số điện thoại không hợp lệ"
+                }
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <Form.Item
+                  label={
+                    <span className="text-sm font-bold text-(--text-primary-color)">
+                      Số điện thoại{" "}
+                      <span className="font-normal text-(--text-secondary-color)"></span>
+                    </span>
                   }
-                }}
-                render={({ field }) => (
+                  validateStatus={error ? "error" : ""}
+                  help={error?.message}
+                  className="mb-0"
+                >
                   <Input
                     {...field}
                     prefix={
                       <MdOutlinePhone className="mr-1 text-lg text-(--text-secondary-color)" />
                     }
                     placeholder="0987xxxxxx"
-                    size="large"
                     className={inputClassName}
                   />
-                )}
-              />
-            </Form.Item>
+                </Form.Item>
+              )}
+            />
           </div>
         )}
 
         {currentStep === 2 && (
           <div className="animate-in fade-in slide-in-from-right-3 space-y-5 duration-200">
-            <Form.Item
-              label={
-                <span className="text-sm font-bold text-(--text-primary-color)">
-                  Mật khẩu
-                </span>
-              }
-              validateStatus={errors.password ? "error" : undefined}
-              help={
-                errors.password?.message ? (
-                  <span className="text-xs font-medium">
-                    {errors.password.message}
-                  </span>
-                ) : undefined
-              }
-              className="mb-0"
-            >
-              <Controller
-                name="password"
-                control={control}
-                rules={{
-                  required: "Mật khẩu là bắt buộc",
-                  minLength: { value: 6, message: "Tối thiểu 6 ký tự" }
-                }}
-                render={({ field }) => (
+            <Controller
+              name="password"
+              control={control}
+              rules={{
+                required: "Mật khẩu là bắt buộc",
+                minLength: { value: 6, message: "Tối thiểu 6 ký tự" }
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <Form.Item
+                  label={
+                    <span className="text-sm font-bold text-(--text-primary-color)">
+                      Mật khẩu
+                    </span>
+                  }
+                  validateStatus={error ? "error" : ""}
+                  help={error?.message}
+                  className="mb-0"
+                >
                   <Input.Password
                     {...field}
                     prefix={
                       <MdOutlineLock className="mr-1 text-lg text-(--text-secondary-color)" />
                     }
                     placeholder="Tối thiểu 6 ký tự"
-                    size="large"
                     className={inputClassName}
+                    onChange={(e) => {
+                      field.onChange(e)
+                      trigger("confirmPassword")
+                    }}
                   />
-                )}
-              />
-            </Form.Item>
+                </Form.Item>
+              )}
+            />
 
-            <Form.Item
-              label={
-                <span className="text-sm font-bold text-(--text-primary-color)">
-                  Xác nhận mật khẩu
-                </span>
-              }
-              validateStatus={errors.confirmPassword ? "error" : undefined}
-              help={
-                errors.confirmPassword?.message ? (
-                  <span className="text-xs font-medium">
-                    {errors.confirmPassword.message}
-                  </span>
-                ) : undefined
-              }
-              className="mb-0"
-            >
-              <Controller
-                name="confirmPassword"
-                control={control}
-                rules={{
-                  required: "Vui lòng nhập lại mật khẩu",
-                  validate: (v) =>
-                    v === passwordValue || "Mật khẩu xác nhận không khớp"
-                }}
-                render={({ field }) => (
+            <Controller
+              name="confirmPassword"
+              control={control}
+              rules={{
+                required: "Vui lòng nhập lại mật khẩu",
+                validate: (value) =>
+                  value === getValues("password") ||
+                  "Mật khẩu xác nhận không khớp"
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <Form.Item
+                  label={
+                    <span className="text-sm font-bold text-(--text-primary-color)">
+                      Xác nhận mật khẩu
+                    </span>
+                  }
+                  validateStatus={error ? "error" : ""}
+                  help={error?.message}
+                  className="mb-0"
+                >
                   <Input.Password
                     {...field}
                     prefix={
                       <MdOutlineLock className="mr-1 text-lg text-(--text-secondary-color)" />
                     }
                     placeholder="Nhập lại mật khẩu"
-                    size="large"
                     className={inputClassName}
                   />
-                )}
-              />
-            </Form.Item>
+                </Form.Item>
+              )}
+            />
           </div>
         )}
       </div>
@@ -302,15 +271,13 @@ const RegisterForm = () => {
             onClick={prev}
             className="flex h-11 shrink-0 items-center gap-2 rounded-sm border border-gray-200 px-5 text-sm font-bold text-gray-700 transition-all hover:bg-gray-50 active:scale-95"
           >
-            <ArrowLeftOutlined className="text-xs" />
-            Quay lại
+            <ArrowLeftOutlined className="text-xs" /> Quay lại
           </button>
         )}
-
         <button
           type={currentStep < 2 ? "button" : "submit"}
           onClick={currentStep < 2 ? next : undefined}
-          className="flex h-11 flex-1 items-center justify-center gap-2 rounded-sm bg-gray-900 text-sm font-bold text-white shadow-sm shadow-gray-200 transition-all hover:bg-gray-800 active:scale-[0.99]"
+          className="flex h-11 flex-1 items-center justify-center gap-2 rounded-sm bg-gray-900 text-sm font-bold text-white transition-all hover:bg-gray-800 active:scale-[0.99]"
         >
           {currentStep < 2 ? (
             <>
