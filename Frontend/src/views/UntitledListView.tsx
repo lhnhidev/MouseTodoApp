@@ -197,42 +197,6 @@ const UntitledListView = ({ listName }: UntitledListViewProps) => {
         </div>
       </div>
 
-      {/* Ý kiến */}
-      <div
-        className="absolute right-0 bottom-0 left-0 flex items-center justify-center gap-4 px-4 py-2 text-[13px] font-medium text-white"
-        style={{ backgroundColor: untitledListColors.bannerBg }}
-      >
-        <span>Bạn thích ứng dụng của chúng tôi?</span>
-        <button
-          className="rounded px-6 py-1 transition-colors"
-          style={{ backgroundColor: untitledListColors.buttonHoverBg }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              untitledListColors.buttonActiveBg)
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              untitledListColors.buttonHoverBg)
-          }
-        >
-          Có
-        </button>
-        <button
-          className="rounded px-6 py-1 transition-colors"
-          style={{ backgroundColor: untitledListColors.buttonHoverBg }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              untitledListColors.buttonActiveBg)
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              untitledListColors.buttonHoverBg)
-          }
-        >
-          Không hẳn
-        </button>
-        <button className="absolute right-4 text-xl">×</button>
-      </div>
     </div>
   )
 }
