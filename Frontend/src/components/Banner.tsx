@@ -64,7 +64,11 @@ const Banner = () => {
       >
         Không hẳn
       </button>
-      <button onClick={handleClose} className="absolute right-4 text-xl hover:opacity-80 transition-opacity">
+      <button
+        onClick={handleClose}
+        aria-label="Đóng"
+        className="absolute right-4 text-xl hover:opacity-80 transition-opacity"
+      >
         ×
       </button>
     </div>
