@@ -1,5 +1,6 @@
 import { useState } from "react"
 const FEEDBACK_KEY = "mouse_todo_banner_feedback_given"
+const BANNER_DURATION = 10000 // 10 seconds
 
 const Banner = () => {
   const [hasResponded, setHasResponded] = useState(() => {
@@ -22,7 +23,7 @@ const Banner = () => {
       if (!sessionStorage.getItem(FEEDBACK_KEY)) {
         setIsVisible(true)
       }
-    }, 10000)
+    }, BANNER_DURATION)
   }
   // không hiển thị nữa nếu đã phản hồi
   if (!isVisible || hasResponded) {return null}
