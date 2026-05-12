@@ -30,7 +30,7 @@ const Navigation = ({
     <div className="flex h-full w-72.5 flex-col border-r border-[#edebe9] bg-white pt-4 pb-2">
       {/* người dùng */}
       <div className="flex items-center px-4 pb-4">
-        <Avatar size={48} src={user?.avatarUrl} className="mr-3" />
+        <Avatar size={48} src={user?.avatarUrl} className="mr-2!" />
         <div className="flex-1 overflow-hidden">
           <div className="text-sm font-semibold text-[#000000]">
             {user?.name || "Người dùng"}

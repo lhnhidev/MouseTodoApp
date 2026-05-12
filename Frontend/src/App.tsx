@@ -19,22 +19,12 @@ const App = () => {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        height: "100vh",
-        overflow: "hidden",
-        position: "relative",
-        backgroundColor: "#fff"
-      }}
-    >
+    <div className="relative flex h-screen w-full flex-col overflow-hidden bg-white">
       {hasElectronAPI ? <TitleBar /> : null}
 
-      <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
+      <div className="flex flex-1 overflow-hidden">
         <Navigation activeKey={activeKey} onSelect={setActiveKey} />
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", position: "relative", overflow: "hidden" }}>
+        <div className="relative flex flex-1 flex-col overflow-hidden">
           {activeKey === "untitled-list" ? (
             <UntitledListView listName={getActiveLabel()} />
           ) : (
