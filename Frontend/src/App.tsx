@@ -8,7 +8,7 @@ import Banner from "./components/Banner"
 const App = () => {
   const hasElectronAPI =
     typeof window !== "undefined" && "electronAPI" in window
-  const [activeKey, setActiveKey] = useState("my-day")
+  const [activeKey, setActiveKey] = useState<string>("my-day")
 
   const getActiveLabel = () => {
     if (activeKey === "untitled-list") {
@@ -19,22 +19,12 @@ const App = () => {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        height: "100vh",
-        overflow: "hidden",
-        position: "relative",
-        backgroundColor: "#fff"
-      }}
-    >
+    <div className="relative flex h-screen w-full flex-col overflow-hidden bg-white">
       {hasElectronAPI ? <TitleBar /> : null}
 
-      <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
+      <div className="flex flex-1 overflow-hidden">
         <Navigation activeKey={activeKey} onSelect={setActiveKey} />
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", position: "relative", overflow: "hidden" }}>
+        <div className="relative flex flex-1 flex-col overflow-hidden">
           {activeKey === "untitled-list" ? (
             <UntitledListView listName={getActiveLabel()} />
           ) : (
