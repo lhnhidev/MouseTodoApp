@@ -1,14 +1,12 @@
 import { useState } from "react"
 const FEEDBACK_KEY = "mouse_todo_banner_feedback_given"
-const BANNER_DURATION = 10000 // 10 seconds
+const BANNER_DURATION = 10000 // 10 giây
 
 const Banner = () => {
-  const [hasResponded, setHasResponded] = useState(() => {
+  const [hasResponded, setHasResponded] = useState<boolean>(() => {
     return sessionStorage.getItem(FEEDBACK_KEY) === "true"
   })
-  const [isVisible, setIsVisible] = useState(!hasResponded)
-
-
+  const [isVisible, setIsVisible] = useState<boolean>(!hasResponded)
 
   const handleFeedback = () => {
     setIsVisible(false)
@@ -26,9 +24,11 @@ const Banner = () => {
     }, BANNER_DURATION)
   }
   // không hiển thị nữa nếu đã phản hồi
-  if (!isVisible || hasResponded) {return null}
+  if (!isVisible || hasResponded) {
+    return null
+  }
   return (
-    <div className="absolute right-0 bottom-0 left-0 z-50 flex animate-in slide-in-from-bottom items-center justify-center gap-4 bg-[#005fb8] px-4 py-2 text-[13px] font-medium text-white duration-300">
+    <div className="animate-in slide-in-from-bottom absolute right-0 bottom-0 left-0 z-50 flex items-center justify-center gap-4 bg-[#005fb8] px-4 py-2 text-[13px] font-medium text-white duration-300">
       <span>Bạn thích ứng dụng của chúng tôi?</span>
       <button
         onClick={handleFeedback}

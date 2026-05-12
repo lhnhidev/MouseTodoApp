@@ -24,7 +24,7 @@ const Navigation = ({
   taskCounts = {}
 }: NavigationProps) => {
   const isElectron = typeof window !== "undefined" && "electronAPI" in window
-  const [isIconHovered, setIsIconHovered] = useState(false)
+  const [isIconHovered, setIsIconHovered] = useState<boolean>(false)
 
   return (
     <div className="flex h-full w-72.5 flex-col border-r border-[#edebe9] bg-white pt-4 pb-2">

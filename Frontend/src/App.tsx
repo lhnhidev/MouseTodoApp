@@ -8,7 +8,7 @@ import Banner from "./components/Banner"
 const App = () => {
   const hasElectronAPI =
     typeof window !== "undefined" && "electronAPI" in window
-  const [activeKey, setActiveKey] = useState("my-day")
+  const [activeKey, setActiveKey] = useState<string>("my-day")
 
   const getActiveLabel = () => {
     if (activeKey === "untitled-list") {

@@ -11,14 +11,21 @@ type UntitledListViewProps = {
   listName: string
 }
 
+type Todo = {
+  id: number
+  title: string
+  isCompleted: boolean
+  isImportant: boolean
+}
+
 const UntitledListView = ({ listName }: UntitledListViewProps) => {
-  const [isInputFocused, setIsInputFocused] = useState(false)
-  const [newTaskTitle, setNewTaskTitle] = useState("")
-  const [isCompletedVisible, setIsCompletedVisible] = useState(true)
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false)
+  const [newTaskTitle, setNewTaskTitle] = useState<string>("")
+  const [isCompletedVisible, setIsCompletedVisible] = useState<boolean>(true)
 
   // Data ảo
   // TODO: Thay thế sau
-  const [todos, setTodos] = useState([
+  const [todos, setTodos] = useState<Todo[]>([
     { id: 1, title: "4", isCompleted: true, isImportant: false },
     { id: 2, title: "test", isCompleted: false, isImportant: false }
   ])
