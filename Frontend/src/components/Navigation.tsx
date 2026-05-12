@@ -28,7 +28,7 @@ const Navigation = ({
 
   return (
     <div className="flex h-full w-72.5 flex-col border-r border-[#edebe9] bg-white pt-4 pb-2">
-      {/* User Profile */}
+      {/* người dùng */}
       <div className="flex items-center px-4 pb-4">
         <Avatar size={48} src={user?.avatarUrl} className="mr-3" />
         <div className="flex-1 overflow-hidden">
@@ -42,11 +42,9 @@ const Navigation = ({
         </div>
       </div>
 
-      {/* Search Bar */}
+      {/* thanh tìm kiếm */}
       <div className="px-4 pb-3">
-        <div
-          className="relative flex w-full items-center"
-        >
+        <div className="relative flex w-full items-center">
           <Input
             placeholder="Tìm kiếm"
             variant="borderless"
@@ -59,12 +57,12 @@ const Navigation = ({
               isIconHovered ? "bg-[#edebe9]" : "bg-transparent"
             }`}
           >
-            <NAV_ICONS.Search className="text-[#1A1A1A] text-sm" />
+            <NAV_ICONS.Search className="text-sm text-[#1A1A1A]" />
           </div>
         </div>
       </div>
 
-      {/* Navigation Items */}
+      {/* items của thanh điều hướng */}
       <div className="flex-1 overflow-y-auto">
         {navigationItems.map((item) => (
           <button
@@ -133,7 +131,7 @@ const Navigation = ({
           <span className="flex-1 text-[15px] font-normal">Danh sách mới</span>
         </button>
 
-        {/* New group icon */}
+        {/* danh sách mới icon */}
         <button
           type="button"
           className="flex w-10 cursor-pointer items-center justify-center rounded-sm border-none bg-transparent text-black transition-colors duration-100 hover:bg-[#f3f2f1] focus:outline-none"
