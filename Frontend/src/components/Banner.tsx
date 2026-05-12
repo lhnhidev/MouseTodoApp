@@ -57,7 +57,8 @@ const Banner = () => {
       </button>
       <button
         onClick={handleClose}
-        className="absolute right-4 text-xl transition-opacity hover:opacity-80"
+        aria-label="Đóng"
+        className="absolute right-4 text-xl hover:opacity-80 transition-opacity"
       >
         ×
       </button>
