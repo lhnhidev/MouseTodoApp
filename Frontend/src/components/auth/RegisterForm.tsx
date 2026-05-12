@@ -5,7 +5,7 @@ import {
   type SubmitHandler,
   type Path
 } from "react-hook-form"
-import { Form, Input } from "antd"
+import { Form, Input, message } from "antd"
 import {
   MdOutlineEmail,
   MdOutlinePhone,
@@ -73,14 +73,14 @@ const RegisterForm = () => {
     }
   }
 
-  const prev = () => setCurrentStep((s) => s - 1)
+  const prev = () => setCurrentStep((s) => Math.max(s - 1, 0))
 
   const onSubmit: SubmitHandler<IRegisterForm> = () => {
-    alert("Đăng ký thành công!")
+    // alert("Đăng ký thành công!")
+    message.success("Đăng ký thành công")
   }
 
-  const inputClassName =
-    "h-11 rounded-sm border-gray-200! hover:border-gray-300! focus:border-gray-900! focus:shadow-none! transition-all duration-150"
+  const inputClassName = "h-11 rounded-sm "
 
   return (
     <Form
@@ -171,7 +171,7 @@ const RegisterForm = () => {
                 <Form.Item
                   label={
                     <span className="text-sm font-bold text-(--text-primary-color)">
-                      Số điện thoại{" "}
+                      Số điện thoại
                       <span className="font-normal text-(--text-secondary-color)"></span>
                     </span>
                   }
