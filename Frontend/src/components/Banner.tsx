@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 const FEEDBACK_KEY = "mouse_todo_banner_feedback_given"
 const BANNER_DURATION = 10000 // 10 giây
 
@@ -7,6 +7,15 @@ const Banner = () => {
     return sessionStorage.getItem(FEEDBACK_KEY) === "true"
   })
   const [isVisible, setIsVisible] = useState<boolean>(!hasResponded)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [])
 
   const handleFeedback = () => {
     setIsVisible(false)
@@ -16,8 +25,12 @@ const Banner = () => {
 
   const handleClose = () => {
     setIsVisible(false)
+    // xóa timeout khi đóng banner trước 10 giây
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
     // 10 giây sau hiện lại nếu chọn đóng
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       if (!sessionStorage.getItem(FEEDBACK_KEY)) {
         setIsVisible(true)
       }
