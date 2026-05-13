@@ -10,7 +10,7 @@ const router = createHashRouter([
     children: [
       {
         path: "",
-        element: <Navigate to="auth" />
+        element: <Navigate to="auth" replace />
       },
       {
         path: "auth",
@@ -23,11 +23,19 @@ const router = createHashRouter([
         children: [
           {
             path: "my-day",
-            element: <div className="text-xl">TEST Nội dung trang My Day</div>
+            element: (
+              <div className="text-xl">
+                TEST Nội dung trang My Day - Sẽ xóa khi triển khai
+              </div>
+            )
           },
           {
             path: "important",
-            element: <div className="text-xl">TEST Trang Quan trọng</div>
+            element: (
+              <div className="text-xl">
+                TEST Trang Quan trọng - Sẽ xóa khi triển khai
+              </div>
+            )
           }
         ]
       }

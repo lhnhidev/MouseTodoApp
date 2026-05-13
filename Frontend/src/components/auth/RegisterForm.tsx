@@ -19,7 +19,7 @@ import {
 } from "@ant-design/icons"
 import Stepper from "../commons/Stepper.tsx"
 
-interface IRegisterForm {
+type TRegisterForm = {
   username: string
   email: string
   phoneNumber: string
@@ -36,7 +36,7 @@ const STEPS = [
 const RegisterForm = () => {
   const [currentStep, setCurrentStep] = useState(0)
 
-  const { control, handleSubmit, trigger, getValues } = useForm<IRegisterForm>({
+  const { control, handleSubmit, trigger, getValues } = useForm<TRegisterForm>({
     defaultValues: {
       username: "",
       email: "",
@@ -50,7 +50,6 @@ const RegisterForm = () => {
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
       e.preventDefault()
-
       if (currentStep < STEPS.length - 1) {
         next()
       } else {
@@ -58,8 +57,9 @@ const RegisterForm = () => {
       }
     }
   }
+
   const next = async () => {
-    let fields: Path<IRegisterForm>[] = []
+    let fields: Path<TRegisterForm>[] = []
     if (currentStep === 0) {
       fields = ["username"]
     }
@@ -75,8 +75,7 @@ const RegisterForm = () => {
 
   const prev = () => setCurrentStep((s) => Math.max(s - 1, 0))
 
-  const onSubmit: SubmitHandler<IRegisterForm> = () => {
-    // alert("Đăng ký thành công!")
+  const onSubmit: SubmitHandler<TRegisterForm> = () => {
     message.success("Đăng ký thành công")
   }
 
@@ -163,7 +162,7 @@ const RegisterForm = () => {
               rules={{
                 required: "Số điện thoại là bắt buộc",
                 pattern: {
-                  value: /^(0[3|5|7|8|9])([0-9]{8})$/,
+                  value: /^(0[35789])([0-9]{8})$/,
                   message: "Số điện thoại không hợp lệ"
                 }
               }}
@@ -172,7 +171,6 @@ const RegisterForm = () => {
                   label={
                     <span className="text-sm font-bold text-(--text-primary-color)">
                       Số điện thoại
-                      <span className="font-normal text-(--text-secondary-color)"></span>
                     </span>
                   }
                   validateStatus={error ? "error" : ""}
@@ -277,7 +275,7 @@ const RegisterForm = () => {
         <button
           type={currentStep < 2 ? "button" : "submit"}
           onClick={currentStep < 2 ? next : undefined}
-          className="flex h-11 flex-1 items-center justify-center gap-2 rounded-sm bg-gray-900 text-sm font-bold text-white transition-all hover:bg-gray-800 active:scale-[0.99]"
+          className="flex h-11 flex-1 items-center justify-center gap-2 rounded-sm bg-gray-900 text-sm font-bold text-white shadow-sm shadow-gray-200 transition-all hover:bg-gray-800 active:scale-[0.99]"
         >
           {currentStep < 2 ? (
             <>
