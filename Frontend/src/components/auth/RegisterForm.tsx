@@ -18,23 +18,11 @@ import {
   CheckOutlined
 } from "@ant-design/icons"
 import Stepper from "../commons/Stepper.tsx"
-
-type TRegisterForm = {
-  username: string
-  email: string
-  phoneNumber: string
-  password: string
-  confirmPassword: string
-}
-
-const STEPS = [
-  { id: "step-identity", label: "Định danh" },
-  { id: "step-contact", label: "Liên lạc" },
-  { id: "step-security", label: "Bảo mật" }
-]
+import type { TRegisterForm } from "@/types/TRegisterForm.ts"
+import { STEPS } from "@/consts/step.ts"
 
 const RegisterForm = () => {
-  const [currentStep, setCurrentStep] = useState(0)
+  const [currentStep, setCurrentStep] = useState<number>(0)
 
   const { control, handleSubmit, trigger, getValues } = useForm<TRegisterForm>({
     defaultValues: {
