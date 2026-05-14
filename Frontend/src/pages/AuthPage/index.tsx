@@ -7,7 +7,7 @@ const AuthPage = () => {
 
   return (
     <div className="flex h-full items-center justify-center bg-gray-50 p-4">
-      <div className="w-full max-w-sm bg-white p-9">
+      <div className="w-full max-w-sm rounded bg-white p-9 shadow-2xl">
         <div className="mb-8 flex items-center gap-2.5">
           <img
             src="./Mouse-Todo-App.png"

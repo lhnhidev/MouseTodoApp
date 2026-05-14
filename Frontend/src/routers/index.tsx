@@ -16,7 +16,6 @@ const router = createHashRouter([
         path: "auth",
         element: <AuthPage />
       },
-
       {
         path: "main",
         element: <MainLayout />,

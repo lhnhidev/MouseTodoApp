@@ -8,7 +8,6 @@ const RootLayout = () => {
   return (
     <div className="flex h-screen w-full flex-col overflow-hidden bg-(--light-theme-bg)">
       {hasElectronAPI && <TitleBar />}
-
       <div className="relative flex-1 overflow-hidden">
         <Outlet />
       </div>
