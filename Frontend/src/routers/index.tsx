@@ -2,6 +2,7 @@ import { createHashRouter, Navigate } from "react-router-dom"
 import RootLayout from "@/layouts/RootLayout"
 import MainLayout from "@/layouts/MainLayout"
 import AuthPage from "@/pages/AuthPage"
+import UntitledListView from "@/views/UntitledListView"
 
 const router = createHashRouter([
   {
@@ -35,6 +36,10 @@ const router = createHashRouter([
                 TEST Trang Quan trọng - Sẽ xóa khi triển khai
               </div>
             )
+          },
+          {
+            path: "untitled-list",
+            element: <UntitledListView listName="Danh sách chưa có tên" />
           }
         ]
       }
