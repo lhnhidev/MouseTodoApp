@@ -23,19 +23,11 @@ const router = createHashRouter([
         children: [
           {
             path: "my-day",
-            element: (
-              <div className="text-xl">
-                TEST Nội dung trang My Day - Sẽ xóa khi triển khai
-              </div>
-            )
+            element: <UntitledListView listName="Ngày của tôi" />
           },
           {
             path: "important",
-            element: (
-              <div className="text-xl">
-                TEST Trang Quan trọng - Sẽ xóa khi triển khai
-              </div>
-            )
+            element: <UntitledListView listName="Quan trọng" />
           },
           {
             path: "untitled-list",

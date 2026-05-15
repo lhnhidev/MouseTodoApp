@@ -8,7 +8,7 @@ const MainLayout = () => {
   return (
     <div className="flex h-full w-full overflow-hidden">
       <Navigation activeKey={activeKey} onSelect={setActiveKey} />
-      <main className="flex-1 overflow-auto p-4 shadow-2xl">
+      <main className="flex-1 overflow-auto">
         <Outlet />
       </main>
     </div>

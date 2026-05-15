@@ -6,6 +6,7 @@ import {
 } from "react-icons/hi2"
 import { TbTransitionTop } from "react-icons/tb"
 import TodoItem from "../components/TodoItem"
+import Banner from "@/components/Banner"
 
 type UntitledListViewProps = {
   listName: string
@@ -59,7 +60,7 @@ const UntitledListView = ({ listName }: UntitledListViewProps) => {
   }
 
   return (
-    <div className="relative flex h-full flex-1 flex-col overflow-hidden bg-[#5c70be] select-none">
+    <div className="relative flex h-full flex-1 flex-col overflow-hidden rounded-sm bg-[#5c70be] select-none">
       {/* Header */}
       <div className="flex items-center justify-between px-6 pt-4 pb-2">
         <h1 className="text-xl font-semibold tracking-tight text-white">
@@ -80,9 +81,9 @@ const UntitledListView = ({ listName }: UntitledListViewProps) => {
 
       {/* Nội dung */}
       <div className="flex-1 overflow-y-auto px-4 pt-2 pb-24">
-        <div className="mx-auto max-w-full space-y-4">
+        <div className="mx-auto max-w-full">
           {/* Task cần làm */}
-          <div className="space-y-0.5">
+          <div className="space-y-1.5">
             {activeTodos.map((todo) => (
               <TodoItem
                 key={todo.id}
@@ -111,7 +112,7 @@ const UntitledListView = ({ listName }: UntitledListViewProps) => {
 
               {/* Task làm xong */}
               {isCompletedVisible && (
-                <div className="space-y-0.5">
+                <div className="space-y-1.5">
                   {completedTodos.map((todo) => (
                     <TodoItem
                       key={todo.id}
@@ -151,6 +152,8 @@ const UntitledListView = ({ listName }: UntitledListViewProps) => {
           />
         </div>
       </div>
+
+      <Banner />
     </div>
   )
 }

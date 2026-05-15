@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Avatar, Input, Divider } from "antd"
 import { navigationItems, NAV_ICONS } from "./navigation/navigation.config"
+import { Link } from "react-router-dom"
 
 type User = {
   name: string
@@ -65,29 +66,31 @@ const Navigation = ({
       {/* items của thanh điều hướng */}
       <div className="flex-1 overflow-y-auto">
         {navigationItems.map((item) => (
-          <button
-            key={item.key}
-            type="button"
-            onClick={() => onSelect(item.key)}
-            aria-current={item.key === activeKey ? "page" : undefined}
+          <Link
             className={`relative mx-2 my-0.5 flex w-[calc(100%-16px)] cursor-pointer items-center rounded-sm border-none px-4 py-2 text-left text-black transition-colors duration-100 focus:outline-none ${
               item.key === activeKey
                 ? "bg-[#edebe9]"
                 : "bg-transparent hover:bg-[#f3f2f1]"
             }`}
+            to={`${item.key}`}
+            key={item.key}
+            onClick={() => onSelect(item.key)}
+            aria-current={item.key === activeKey ? "page" : undefined}
           >
             {item.key === activeKey && (
               <div className="absolute top-1/4 bottom-1/4 left-0 w-0.75 rounded-xs bg-[#005FB8]" />
             )}
 
             <span className="mr-4 flex text-[18px]">{item.icon}</span>
-            <span className="flex-1 text-sm font-normal">{item.label}</span>
+            <span className="flex-1 text-sm font-normal text-black">
+              {item.label}
+            </span>
             {taskCounts[item.key] !== undefined && taskCounts[item.key] > 0 && (
               <span className="ml-2 text-[12px] text-[#605e5d]">
                 {taskCounts[item.key]}
               </span>
             )}
-          </button>
+          </Link>
         ))}
 
         <Divider style={{ margin: "8px 0" }} />
