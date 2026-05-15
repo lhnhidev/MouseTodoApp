@@ -120,8 +120,11 @@ const LoginForm = () => {
             control={control}
             render={({ field }) => (
               <Checkbox
-                {...field}
-                checked={field.value}
+                name={field.name}
+                checked={!!field.value}
+                onChange={(e) => field.onChange(e.target.checked)}
+                onBlur={field.onBlur}
+                ref={field.ref}
                 className="text-xs font-medium text-(--text-secondary-color)"
               >
                 Ghi nhớ đăng nhập
