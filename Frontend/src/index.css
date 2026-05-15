@@ -8,4 +8,24 @@ body {
   --light-theme-bg: #ffffff;
   --dark-theme-bg: #1a1b1c;
   --window-control-btn-hover: #2d2d2d;
+
+  /* text colors */
+  --text-primary-color: oklch(13% 0.028 261.692);
+  --text-secondary-color: oklch(55.1% 0.027 264.364);
+  --text-placeholder-color: oklch(70.7% 0.022 261.325);
+}
+
+/* override ant-design colors */
+.css-var-root.ant-input-css-var {
+  --ant-input-addon-bg: rgba(0, 0, 0, 0.02);
+  --ant-input-active-border-color: #434343;
+  --ant-input-hover-border-color: #8c8c8c;
+  --ant-input-active-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  --ant-input-error-active-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06);
+  --ant-input-warning-active-shadow: 0 0 0 2px rgba(255, 215, 5, 0.1);
+  --ant-input-hover-bg: #ffffff;
+  --ant-input-active-bg: #ffffff;
+  --ant-input-input-font-size: 14px;
+  --ant-input-input-font-size-lg: 16px;
+  --ant-input-input-font-size-sm: 14px;
 }

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MouseTodoApp.Domain.Entities;
 
-namespace MouseTodoApp.Adapters.Persistence.Configurations
+namespace MouseTodoApp.Adapters.Configurations
 {
     internal class TodoListConfiguration : IEntityTypeConfiguration<TodoList>
     {
