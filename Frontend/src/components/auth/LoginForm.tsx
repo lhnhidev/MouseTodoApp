@@ -38,9 +38,8 @@ const LoginForm = () => {
 
       message.success("Đăng nhập thành công!")
       navigate("/main/my-day")
-    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     } catch (error) {
-      message.error("Đã có lỗi xảy ra, vui lòng thử lại sau")
+      message.error((error as Error).message)
     }
   }
 
