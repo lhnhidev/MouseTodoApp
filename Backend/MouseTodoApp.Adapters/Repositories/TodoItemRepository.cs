@@ -17,16 +17,28 @@ namespace MouseTodoApp.Adapters.Repositories
             _context = context;
         }
 
+        public async Task CreateTodoItemAsync(TodoItem todoItem)
+        {
+            await _context.TodoItems.AddAsync(todoItem);
+            await SaveChangesAsync();
+        }
+
         public async Task<List<TodoItem>> GetAllTodoItemsAsync()
         {
             var todoList = await _context.TodoItems.ToListAsync();
             return todoList;
         }
 
-        public async Task<TodoItem> GetTodoItemByIdAsync(Guid id)
+        public async Task<TodoItem?> GetTodoItemByIdAsync(Guid id)
         {
             var todoItem = await _context.TodoItems.FindAsync(id);
-            return todoItem == null ? throw new Exception("") : todoItem;
+
+            return todoItem;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }
