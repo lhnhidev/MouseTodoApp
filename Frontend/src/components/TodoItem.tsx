@@ -16,7 +16,7 @@ const TodoItem = ({
   onToggleImportant
 }: TodoItemProps) => {
   return (
-    <div className="group mb-0.5 flex cursor-default items-center rounded-sm bg-white px-4 py-2.75 shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-all duration-75 select-none hover:bg-gray-100 active:bg-gray-100">
+    <div className="group flex cursor-default items-center rounded-sm bg-white px-4 py-2.75 shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-all duration-75 select-none hover:bg-gray-100 active:bg-gray-100">
       {/* Checkbox icon */}
       <div
         className="mr-4 flex shrink-0 cursor-pointer items-center justify-center text-[22px]"
